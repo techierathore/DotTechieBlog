@@ -228,8 +228,6 @@
     <Content Include="Content\Admin\js\jquery.prettyPhoto.js" />
     <Content Include="Content\Admin\js\jquery.rateit.min.js" />
     <Content Include="Content\Admin\js\respond.min.js" />
-    <Content Include="Content\Admin\js\sparkline-index.js" />
-    <Content Include="Content\Admin\js\sparklines.js" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\dist\css\bootstrap.css" />

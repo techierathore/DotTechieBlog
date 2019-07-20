@@ -1,0 +1,69 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "SignUp";
+}
+<div class="admin-form">
+    <!-- Widget starts -->
+    <div class="widget wred">
+        <div class="widget-head">
+            <i class="fa fa-lock"></i> Register
+        </div>
+        <div class="widget-content">
+            <div class="padd">
+                @using (Html.BeginForm("SignUp", "Account",new {area="Admin"}, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                        <!-- Registration form starts -->
+                        <!-- Name -->
+                        <div class="form-group">
+                            <label class="control-label col-lg-3" for="FirstName">First Name</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="FirstName" name="FirstName">
+                            </div>
+                        </div>
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label class="control-label col-lg-3" for="LastName">Last Name</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="LastName" name="LastName">
+                            </div>
+                        </div>
+                        <!-- Select box -->
+                        <div class="form-group">
+                            <label class="control-label col-lg-3" for="EmailID">Email</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" id="EmailID" name="EmailID">
+                            </div>
+                        </div>
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label class="control-label col-lg-3" for="LoginPassword">Password</label>
+                            <div class="col-lg-9">
+                                <input type="password" class="form-control" id="LoginPassword" name="LoginPassword">
+                            </div>
+                        </div>
+                        <!-- Accept box and button s-->
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <div id="captcha" class="captcha">
+                                    @Html.Label("Captcha")
+                                    @Html.Captcha("Refresh", "Enter the text you see above", 5, "<span class='text-danger'>Enter Captcha</span>", true)
+                                </div>
+                                <button type="submit" class="btn btn-danger">Register</button>
+                                <button type="reset" class="btn btn-success">Reset</button>
+                            </div>
+                        </div>
+                }
+           </div>
+        </div>
+        <div class="widget-foot">
+            Already Registred? <a href="@Url.Action("Login", "Account", new { Area = "Admin" })">LogIn here</a>
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <h2>@ViewBag.ErrorMessage</h2>
+            }
+        </div>
+    </div>
+</div>
+
+

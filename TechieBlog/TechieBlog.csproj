@@ -47,16 +47,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.8.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.8.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.16\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -135,13 +152,79 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataAccess\BaseDa.cs" />
+    <Compile Include="DataAccess\BlogImage.cs" />
+    <Compile Include="DataAccess\BlogUser.cs" />
+    <Compile Include="DataAccess\Comment.cs" />
+    <Compile Include="DataAccess\Post.cs" />
+    <Compile Include="DataAccess\Tag.cs" />
+    <Compile Include="DataAccess\UserSetting.cs" />
+    <Compile Include="DataAccess\Widget.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BlogComment.cs" />
+    <Compile Include="Models\BlogImage.cs" />
+    <Compile Include="Models\BlogUser.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\UserSetting.cs" />
+    <Compile Include="Models\Widget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\Admin\css\bootstrap-switch.css" />
+    <Content Include="Content\Admin\css\bootstrap.min.css" />
+    <Content Include="Content\Admin\css\delete.gif" />
+    <Content Include="Content\Admin\css\font-awesome.min.css" />
+    <Content Include="Content\Admin\css\fullcalendar.css" />
+    <Content Include="Content\Admin\css\images\animated-overlay.gif" />
+    <Content Include="Content\Admin\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Admin\css\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\Admin\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Admin\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Admin\css\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Admin\css\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Admin\css\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\Admin\css\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Admin\css\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Admin\css\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Admin\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\Admin\css\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Admin\css\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Admin\css\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Admin\css\jquery-ui.css" />
+    <Content Include="Content\Admin\css\jquery.gritter.css" />
+    <Content Include="Content\Admin\css\prettyPhoto.css" />
+    <Content Include="Content\Admin\css\rateit.css" />
+    <Content Include="Content\Admin\css\star.gif" />
+    <Content Include="Content\Admin\css\style.css" />
+    <Content Include="Content\Admin\css\widgets.css" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Admin\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\Admin\js\bootstrap-switch.min.js" />
+    <Content Include="Content\Admin\js\bootstrap.min.js" />
+    <Content Include="Content\Admin\js\custom.js" />
+    <Content Include="Content\Admin\js\excanvas.min.js" />
+    <Content Include="Content\Admin\js\filter.js" />
+    <Content Include="Content\Admin\js\fullcalendar.min.js" />
+    <Content Include="Content\Admin\js\html5shiv.js" />
+    <Content Include="Content\Admin\js\jquery-ui.min.js" />
+    <Content Include="Content\Admin\js\jquery.flot.js" />
+    <Content Include="Content\Admin\js\jquery.flot.pie.js" />
+    <Content Include="Content\Admin\js\jquery.flot.resize.js" />
+    <Content Include="Content\Admin\js\jquery.flot.stack.js" />
+    <Content Include="Content\Admin\js\jquery.gritter.min.js" />
+    <Content Include="Content\Admin\js\jquery.js" />
+    <Content Include="Content\Admin\js\jquery.prettyPhoto.js" />
+    <Content Include="Content\Admin\js\jquery.rateit.min.js" />
+    <Content Include="Content\Admin\js\respond.min.js" />
+    <Content Include="Content\Admin\js\sparkline-index.js" />
+    <Content Include="Content\Admin\js\sparklines.js" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\dist\css\bootstrap.css" />
@@ -159,6 +242,7 @@
     <Content Include="Content\jquery\dist\jquery.slim.js" />
     <Content Include="Content\jquery\dist\jquery.slim.min.js" />
     <Content Include="Content\modernizr\modernizr-custom.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\styles-dark-green.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -178,6 +262,15 @@
     <Content Include="Content\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Content\jquery\dist\jquery.min.map" />
     <Content Include="Content\jquery\dist\jquery.slim.min.map" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Admin\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Admin\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -207,7 +300,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

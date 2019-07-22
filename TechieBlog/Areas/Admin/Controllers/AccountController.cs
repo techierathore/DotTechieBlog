@@ -33,7 +33,7 @@ namespace TechieBlog.Areas.Admin.Controllers
                 }
                 else if (selUser.Role == Constants.Admin || selUser.Role == Constants.BlogUser)
                 {
-                    return RedirectToAction("Index", "Dashboard", new { Area = "Admin" });
+                    return RedirectToAction("Home", "Dashboard", new { Area = "Admin" });
                 }
                 else return RedirectToAction("Index", "Home");
             }

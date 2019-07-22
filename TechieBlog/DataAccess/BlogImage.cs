@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,10 +6,8 @@ using TechieBlog.Models;
 
 namespace TechieBlog.DataAccess
 {
-	 public class BlogImageDa : BaseDa
+    public class BlogImageDa : BaseDa
     {
-
-
 		/// <summary>
 		/// Saves a record to the BlogImages table.
 		/// returns True if value saved successfullyelse false
@@ -19,20 +16,15 @@ namespace TechieBlog.DataAccess
 		public bool Insert(BlogImage aBlogImage)
 		{
 			bool blResult = false;
-			if (ValidateValues(aBlogImage))
-			{
-				 throw new Exception("exists");
-			}
 			 using (var vConn = OpenConnection())
 				 {
 				 var vParams = new DynamicParameters();
-					 vParams.Add("@BlogImageID",aBlogImage.BlogImageID);
 					 vParams.Add("@ImagePath",aBlogImage.ImagePath);
 					 vParams.Add("@Size",aBlogImage.Size);
 					 vParams.Add("@CreatedTime",aBlogImage.CreatedTime);
 					 vParams.Add("@UserID",aBlogImage.UserID);
-					 int iResult = vConn.Execute("BlogImagesInsert", vParams, commandType: CommandType.StoredProcedure);
-			 if (iResult == -1) blResult = true;
+					 int iResult = vConn.Execute("BlogImageInsert", vParams, commandType: CommandType.StoredProcedure);
+			 if (iResult == 1) blResult = true;
 			 }
 			 return blResult;
 		}
@@ -45,10 +37,6 @@ namespace TechieBlog.DataAccess
 		public bool Update(BlogImage aBlogImage)
 		{
 			bool blResult = false;
-				if (ValidateValues(aBlogImage))
-				{
-					 throw new Exception("exists");
-				}
 			 using (var vConn = OpenConnection())
 				 {
 				 var vParams = new DynamicParameters();
@@ -63,25 +51,6 @@ namespace TechieBlog.DataAccess
 			return blResult;
 		}
 
-		/// <summary>
-		/// Validate the values passed to save the details of BlogImages class, that wether those values are already present or not.
-		/// </summary>
-		 protected bool ValidateValues(BlogImage aBlogImage)
-		{
-			 bool blResult = true;
-			 using (var vConn = OpenConnection())
-				 {
-				 var vParams = new DynamicParameters();
-					 vParams.Add("@BlogImageID",aBlogImage.BlogImageID);
-					 vParams.Add("@ImagePath",aBlogImage.ImagePath);
-					 vParams.Add("@Size",aBlogImage.Size);
-					 vParams.Add("@CreatedTime",aBlogImage.CreatedTime);
-					 vParams.Add("@UserID",aBlogImage.UserID);
-					 int iResult = vConn.Execute("BlogImagesValidate", vParams, commandType: CommandType.StoredProcedure);
-			 if (iResult >= 1) blResult = false;
-			}
-			return blResult;
-		}
 		/// <summary>
 		/// Selects all records from the BlogImages table.
 		/// </summary>

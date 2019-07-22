@@ -63,6 +63,7 @@ namespace TechieBlog.Models
 		/// </summary>
 		public string FeaturedImage
 		{ get; set; }
-
-	}
+        public bool Published
+        { get; set; }        
+    }
 }

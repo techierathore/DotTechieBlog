@@ -25,17 +25,15 @@ namespace TechieBlog.DataAccess
 			 using (var vConn = OpenConnection())
 				 {
 				 var vParams = new DynamicParameters();
-					 vParams.Add("@PostID",aPost.PostID);
 					 vParams.Add("@Title",aPost.Title);
 					 vParams.Add("@PostContent",aPost.PostContent);
-					 vParams.Add("@CreatedTime",aPost.CreatedTime);
-					 vParams.Add("@UpdatedTime",aPost.UpdatedTime);
 					 vParams.Add("@UserID",aPost.UserID);
 					 vParams.Add("@Tags",aPost.Tags);
 					 vParams.Add("@CategoryId",aPost.CategoryId);
 					 vParams.Add("@Frequence",aPost.Frequence);
 					 vParams.Add("@FeaturedImage",aPost.FeaturedImage);
-					 int iResult = vConn.Execute("PostsInsert", vParams, commandType: CommandType.StoredProcedure);
+                     vParams.Add("@FeaturedImage", aPost.Published);
+                int iResult = vConn.Execute("PostInsert", vParams, commandType: CommandType.StoredProcedure);
 			 if (iResult == -1) blResult = true;
 			 }
 			 return blResult;

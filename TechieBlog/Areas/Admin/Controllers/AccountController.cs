@@ -1,8 +1,8 @@
-﻿using CaptchaMvc.HtmlHelpers;
+﻿using BlogEngine.Models;
+using BlogEngine.Services;
+using CaptchaMvc.HtmlHelpers;
 using System;
 using System.Web.Mvc;
-using TechieBlog.DataAccess;
-using TechieBlog.Models;
 
 namespace TechieBlog.Areas.Admin.Controllers
 {
@@ -14,22 +14,22 @@ namespace TechieBlog.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(BlogUser loginUser, string returnUrl)
+        public ActionResult Login(BlogUser aLoginUser, string aReturnUrl)
         {
             if (!this.IsCaptchaValid("Captcha is not valid"))
             {
                 ViewBag.errormessage = "Error: captcha entered is not valid.";
-                return View(loginUser);
+                return View(aLoginUser);
             }
-            if (!ModelState.IsValid) return View(loginUser);
-            var objDataAccess = new BlogUserDa();
-            var selUser = objDataAccess.GetLoginUser(loginUser.EmailID, loginUser.LoginPassword);
+            if (!ModelState.IsValid) return View(aLoginUser);
+            var objDataSvc = new AccountSvc();
+            var selUser = objDataSvc.BlogLogin(aLoginUser);
             if (selUser != null)
             {
                 Session[Constants.LoggedUser] = selUser;
-                if (!string.IsNullOrEmpty(returnUrl))
+                if (!string.IsNullOrEmpty(aReturnUrl))
                 {
-                    return Redirect(returnUrl);
+                    return Redirect(aReturnUrl);
                 }
                 else if (selUser.Role == Constants.Admin || selUser.Role == Constants.BlogUser)
                 {
@@ -58,17 +58,15 @@ namespace TechieBlog.Areas.Admin.Controllers
             if (!ModelState.IsValid) return View(aNewUser);
             try
             {
-                var objDataAccess = new BlogUserDa();
-                var vCheckUserByEmail = objDataAccess.GetUserByEmail(aNewUser.EmailID);
-                if (vCheckUserByEmail != null) throw new Exception("User with this Email already present use login or Forgot Password (if you had forgotten the password) ");
+                var objAccSvc = new AccountSvc();
                 aNewUser.Role = Constants.BlogUser;
-
-                if (objDataAccess.Insert(aNewUser))
+                var vNewUser = objAccSvc.BlogSignUp(aNewUser);
+                if (vNewUser != null)
                 {
-                    var vAddedUser = objDataAccess.GetUserByEmail(aNewUser.EmailID);
-                    Session[Constants.LoggedUser] = vAddedUser;
+                    Session[Constants.LoggedUser] = vNewUser;
                     return RedirectToAction("Index", "Home");
                 }
+
             }
             catch (Exception ex)
             {

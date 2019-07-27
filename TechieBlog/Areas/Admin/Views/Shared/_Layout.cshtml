@@ -1,4 +1,4 @@
-﻿@using TechieBlog.Models
+﻿@using BlogEngine.Models
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +16,13 @@
     <link href="~/Content/Admin/css/style.css" rel="stylesheet">
     <!-- Widgets stylesheet -->
     <link href="~/Content/Admin/css/widgets.css" rel="stylesheet">
+    <!-- Javascript files -->
+    <!-- Mordenizer -->
+    <script src="~/Content/modernizr/modernizr-custom.js"></script>
+    <!-- jQuery -->
+    <script src="~/Content/Admin/js/jquery.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/Content/Admin/js/bootstrap.min.js"></script>
     @RenderSection("PageStyles", required: false)
 </head>
 <body>
@@ -139,11 +146,8 @@
     else
     { @RenderBody()}
 
+
     <!-- Javascript files -->
-    <!-- jQuery -->
-    <script src="~/Content/Admin/js/jquery.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="~/Content/Admin/js/bootstrap.min.js"></script>
     <!-- jQuery UI -->
     <script src="~/Content/Admin/js/jquery-ui.min.js"></script>
     <!-- jQuery Flot -->

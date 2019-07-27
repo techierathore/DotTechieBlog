@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using BlogEngine.Models;
+using System.Web.Mvc;
 
 namespace TechieBlog.Areas.Admin.Controllers
 {
@@ -10,6 +11,11 @@ namespace TechieBlog.Areas.Admin.Controllers
             return View();
         }
         public ActionResult NewPost()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult NewPost(Post aNewPost)
         {
             return View();
         }

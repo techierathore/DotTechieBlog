@@ -9,17 +9,20 @@ namespace BlogEngine.Models
 		/// </summary>
 		public long PostID
 		{ get; set; }
-
-		/// <summary>
-		/// Gets or sets the Title value.
-		/// </summary>
-		public string Title
+        
+        /// <summary>
+        /// Gets or sets the Title value.
+        /// </summary>
+        public string Title
 		{ get; set; }
 
-		/// <summary>
-		/// Gets or sets the PostContent value.
-		/// </summary>
-		public string PostContent
+        public string Abstract
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the PostContent value.
+        /// </summary>
+        public string PostContent
 		{ get; set; }
 
 		/// <summary>

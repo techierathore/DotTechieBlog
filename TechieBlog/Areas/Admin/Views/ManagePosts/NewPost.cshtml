@@ -24,12 +24,14 @@
                             <div class="padd">
                                 @using (Html.BeginForm())
                                 {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.PostID, new { htmlAttributes = new { @class = "form-control" } })
                                     <!-- Form starts.  -->
                                 <div class="form-horizontal">
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">Upload Featured Image </label>
                                         <div class="col-md-8">
-                                            <a href="#myModal" class="btn btn-info" data-toggle="modal"><i class="fa fa-image"></i>Upload Image</a>
+                                            <a href="#myModal" class="btn btn-info" data-toggle="modal"><i class="fa fa-image"></i>&nbsp;Upload Featured Image</a>
                                             <!-- Modal -->
                                             <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 @Html.Action("UploadImage", "Image")
@@ -37,21 +39,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Featured Image </label>
+                                        <label class="col-md-2 control-label" for="Title">Title </label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" placeholder="Enter Featured Image">
+                                            <input type="text" class="form-control" id="Title" name="Title" placeholder="Enter Blog Title">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Featured Image </label>
+                                        <label class="col-md-2 control-label" for="Abstract">Abstract </label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" placeholder="Enter Featured Image">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label">Title </label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control" placeholder="Enter Title">
+                                            @Html.TextAreaFor(model => model.Abstract, new { @class = "form-control", @row = 3, })
                                         </div>
                                     </div>
                                     <div class="form-group">

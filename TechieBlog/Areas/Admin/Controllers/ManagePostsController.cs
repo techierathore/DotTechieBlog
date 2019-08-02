@@ -12,7 +12,8 @@ namespace TechieBlog.Areas.Admin.Controllers
         }
         public ActionResult NewPost()
         {
-            return View();
+            Post newPost = new Post() { PostID = 0 };
+            return View(newPost);
         }
         [HttpPost]
         public ActionResult NewPost(Post aNewPost)

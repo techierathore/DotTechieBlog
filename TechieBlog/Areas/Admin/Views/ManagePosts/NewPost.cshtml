@@ -1,4 +1,6 @@
 ﻿@model BlogEngine.Models.Post
+@using BlogEngine.Models
+@using BlogEngine.Services
 @{
     ViewBag.Title = "New Post";
 }
@@ -25,6 +27,8 @@
                             {
                                 @Html.AntiForgeryToken()
                                 @Html.HiddenFor(model => model.PostID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.Published, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
                                 <!-- Form starts.  -->
                                 <div class="form-horizontal">
                                     <div class="form-group">
@@ -57,24 +61,22 @@
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">Tags</label>
                                         <div class="col-md-10">
-                                            @{ 
-
-                                             }
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox1" value="option1"> ASP.Net
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox2" value="option2"> C#
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox3" value="option3"> Xamarin
-                                            </label>
+                                            @{
+                                                var objDataSvc = new BlogSvc();
+                                                var vTags = objDataSvc.GetAllTags();
+                                                foreach (Tag oTag in vTags)
+                                                {
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" id="@oTag.TagName" value="@oTag.TagName" onclick="ChkBoxChecked(this)"> @oTag.TagName
+                                                    </label>
+                                                }
+                                            }
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
                                             <button class="btn btn-info"><i class="fa fa-save"></i> Save Draft</button>
-                                            <button class="btn btn-success"><i class="fa fa-pencil-square"></i> Publish</button>
+                                            <button class="btn btn-success" onclick="PubishBlog()"><i class="fa fa-pencil-square"></i> Publish</button>
                                             <button class="btn btn-danger">Trash</button>
                                         </div>
                                     </div>
@@ -128,12 +130,12 @@
         });
     }
 
-    $("#UploadBlogImg").change(function () {    
+    $("#UploadBlogImg").change(function () {
         UploadBlogImage();
     });
-    function UploadBlogImage() {
-        var url = '@Url.Action("UploadBlogImageFile", "Image")';
-        formData = new FormData();     
+   function UploadBlogImage() {
+        var url = '@Url.Action("UploadFile", "Image")';
+        formData = new FormData();
         var files = $("#UploadBlogImg").get(0).files;
         if (files.length > 0) {
             formData.append("aUploadedFile", files[0]);
@@ -153,5 +155,21 @@
                 alert(data.responseText);
             }
         });
+    }
+   function PubishBlog() {
+         $("#Published").val("true");
+    }
+    function ChkBoxChecked(aChkBox) {
+        var vTags = $('input#Tags').val();
+        if (aChkBox.checked == true) {
+            vTags = vTags + "," + aChkBox.id;
+            $("#Tags").val(vTags);
+        }
+        else {
+            if (vTags.includes(aChkBox.id)) {
+                vTags = vTags.replace(aChkBox.id, '');
+                $("#Tags").val(vTags);
+            }
+        }
     }
 </script>

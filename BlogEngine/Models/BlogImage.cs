@@ -11,10 +11,13 @@ namespace BlogEngine.Models
 		public long BlogImageID
 		{ get; set; }
 
-		/// <summary>
-		/// Gets or sets the ImagePath value.
-		/// </summary>
-		public string ImagePath
+        public string ImageName
+        { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the ImagePath value.
+        /// </summary>
+        public string ImagePath
 		{ get; set; }
 
 		/// <summary>

@@ -16,16 +16,17 @@ namespace BlogEngine.DataAccess
 		public bool Insert(BlogImage aBlogImage)
 		{
 			bool blResult = false;
-			 using (var vConn = OpenConnection())
-				 {
-				 var vParams = new DynamicParameters();
-					 vParams.Add("@ImagePath",aBlogImage.ImagePath);
-					 vParams.Add("@Size",aBlogImage.Size);
-					 vParams.Add("@CreatedTime",aBlogImage.CreatedTime);
-					 vParams.Add("@UserID",aBlogImage.UserID);
-					 int iResult = vConn.Execute("BlogImageInsert", vParams, commandType: CommandType.StoredProcedure);
-			 if (iResult == 1) blResult = true;
-			 }
+            using (var vConn = OpenConnection())
+            {
+                var vParams = new DynamicParameters();
+                vParams.Add("@ImageName", aBlogImage.ImageName);
+                vParams.Add("@ImagePath", aBlogImage.ImagePath);
+                vParams.Add("@Size", aBlogImage.Size);
+                vParams.Add("@CreatedTime", aBlogImage.CreatedTime);
+                vParams.Add("@UserID", aBlogImage.UserID);
+                int iResult = vConn.Execute("BlogImageInsert", vParams, commandType: CommandType.StoredProcedure);
+                if (iResult == 1) blResult = true;
+            }
 			 return blResult;
 		}
 

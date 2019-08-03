@@ -34,19 +34,19 @@ namespace BlogEngine.DataAccess
         public bool Insert(BlogUser aBlogUser)
 		{
 			bool blResult = false;
-			 using (var vConn = OpenConnection())
-				 {
-				 var vParams = new DynamicParameters();
-					 vParams.Add("@FirstName",aBlogUser.FirstName);
-					 vParams.Add("@LastName",aBlogUser.LastName);
-					 vParams.Add("@EmailID",aBlogUser.EmailID);
-					 vParams.Add("@loginPassword",aBlogUser.LoginPassword);
-					 vParams.Add("@Role",aBlogUser.Role);
+            using (var vConn = OpenConnection())
+            {
+                var vParams = new DynamicParameters();
+                vParams.Add("@FirstName", aBlogUser.FirstName);
+                vParams.Add("@LastName", aBlogUser.LastName);
+                vParams.Add("@EmailID", aBlogUser.EmailID);
+                vParams.Add("@loginPassword", aBlogUser.LoginPassword);
+                vParams.Add("@Role", aBlogUser.Role);
                 vParams.Add("@CreatedTime", aBlogUser.CreatedTime);
                 vParams.Add("@UpdatedTime", aBlogUser.UpdatedTime);
                 int iResult = vConn.Execute("BlogUsersInsert", vParams, commandType: CommandType.StoredProcedure);
-			 if (iResult == 1) blResult = true;
-			 }
+                if (iResult == 1) blResult = true;
+            }
 			 return blResult;
 		}
 

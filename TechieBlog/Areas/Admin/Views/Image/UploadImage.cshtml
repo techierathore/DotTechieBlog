@@ -5,7 +5,7 @@
             <h4 class="modal-title">Upload Image</h4>
         </div>
         <div class="modal-body">
-            <input type="file" id="UploadImg" />
+            <input type="file" class="form-control" id="UploadBlogImg" />
             <br />
             <img id="imgPreview" height="200" width="200" class="thumbnail" />
         </div>
@@ -16,41 +16,37 @@
                         <i class="fa fa-clipboard" aria-hidden="true"></i>
                     </button>
                 </span>
-                <input type="text" placeholder="Copy Image link" id="txtImg" class="form-control" aria-label="..." onchange="copytxt();" />
+                <input type="text" placeholder="Copy Image link" class="form-control" aria-label="..." id="FeaturedImage" name="FeaturedImage" />
             </div>
         </div>
     </div>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/clipboard.min.js"></script>
-    <script src="~/Scripts/imagehideblock.js"></script>
-
-    <script>$("#UploadImg").change(function () {
-    alert('Checking');
-                    var data = new FormData();
-                    var files = $("#UploadImg").get(0).files;
-                    if (files.length > 0) {
-                        data.append("MyImages", files[0]);
+<script>
+    $("#UploadImg").change(function () {    
+        UploadBlogImage();
+    });
+    function UploadBlogImage() {
+        var url = '@Url.Action("UploadBlogImageFile", "Image")';
+        formData = new FormData();     
+        var files = $("#UploadImg").get(0).files;
+        if (files.length > 0) {
+            formData.append("aUploadedFile", files[0]);
                     }
-
-                    $.ajax({
-                        url: "/Image/UploadFile",
-                        type: "POST",
-                        processData: false,
-                        contentType: false,
-                        data: data,
-                        success: function (response) {
-                            //code after success
-                            $("#txtImg").val('/Upload/' + response);
-                            $("#imgPreview").attr('src', '/Upload/' + response);
-                        },
-                        error: function (er) {
-                            alert(er);
-                        }
-
-                    });
-
-        });</script>
-}
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (FileUrl) {
+                $("#FeaturedImage").val(FileUrl);
+                $("#imgPreview").attr('src', FileUrl);
+            },
+            error: function (data) {
+                alert(data.responseText);
+            }
+        });
+    }
+</script>

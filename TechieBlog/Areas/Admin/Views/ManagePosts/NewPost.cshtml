@@ -13,52 +13,53 @@
     <div class="matter">
         <div class="container">
             <div class="row">&nbsp;</div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="widget wblue">
-                        <div class="widget-head">
-                            <div class="pull-left">New Post</div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="widget-content">
-                            <div class="padd">
-                                @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
-                                    @Html.HiddenFor(model => model.PostID, new { htmlAttributes = new { @class = "form-control" } })
-                                    <!-- Form starts.  -->
+            <div class="col-lg-12">
+                <div class="widget wblue">
+                    <div class="widget-head">
+                        <div class="pull-left">New Post</div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="padd">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.PostID, new { htmlAttributes = new { @class = "form-control" } })
+                                <!-- Form starts.  -->
                                 <div class="form-horizontal">
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">Upload Featured Image </label>
-                                        <div class="col-md-8">
-                                            <a href="#myModal" class="btn btn-info" data-toggle="modal"><i class="fa fa-image"></i>&nbsp;Upload Featured Image</a>
-                                            <!-- Modal -->
-                                            <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                @Html.Action("UploadImage", "Image")
-                                            </div>
+                                        <div class="col-md-10">
+                                            <input type="file" class="form-control" id="UploadBlogImg" />
+                                            <label class="control-label">Squeezed Image Preview</label>
+                                            <img id="imgPreview" height="50" width="50" class="thumbnail" />
+                                            <input type="text" placeholder="Blog Featured Image Url" contenteditable="false" class="form-control" id="FeaturedImage" name="FeaturedImage" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label" for="Title">Title </label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-10">
                                             <input type="text" class="form-control" id="Title" name="Title" placeholder="Enter Blog Title">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label" for="Abstract">Abstract </label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-10">
                                             @Html.TextAreaFor(model => model.Abstract, new { @class = "form-control", @row = 3, })
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">Content</label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-10">
                                             @Html.TextAreaFor(model => model.PostContent, new { @class = "form-control", @row = 5, })
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">Tags</label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-10">
+                                            @{ 
+
+                                             }
                                             <label class="checkbox-inline">
                                                 <input type="checkbox" id="inlineCheckbox1" value="option1"> ASP.Net
                                             </label>
@@ -71,15 +72,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-8">
+                                        <div class="col-md-offset-2 col-md-10">
                                             <button class="btn btn-info"><i class="fa fa-save"></i> Save Draft</button>
                                             <button class="btn btn-success"><i class="fa fa-pencil-square"></i> Publish</button>
                                             <button class="btn btn-danger">Trash</button>
                                         </div>
                                     </div>
                                 </div>
-                                }
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -121,6 +121,33 @@
                 var imgNode = document.createElement('img');
                 imgNode.src = FileUrl;
                 $('#PostContent').summernote('insertNode', imgNode);
+            },
+            error: function (data) {
+                alert(data.responseText);
+            }
+        });
+    }
+
+    $("#UploadBlogImg").change(function () {    
+        UploadBlogImage();
+    });
+    function UploadBlogImage() {
+        var url = '@Url.Action("UploadBlogImageFile", "Image")';
+        formData = new FormData();     
+        var files = $("#UploadBlogImg").get(0).files;
+        if (files.length > 0) {
+            formData.append("aUploadedFile", files[0]);
+                    }
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (FileUrl) {
+                $("#FeaturedImage").val(FileUrl);
+                $("#imgPreview").attr('src', FileUrl);
             },
             error: function (data) {
                 alert(data.responseText);

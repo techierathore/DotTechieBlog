@@ -1,4 +1,5 @@
 using System;
+using System.Web.Mvc;
 
 namespace BlogEngine.Models
 {
@@ -22,6 +23,7 @@ namespace BlogEngine.Models
         /// <summary>
         /// Gets or sets the PostContent value.
         /// </summary>
+        [AllowHtml]
         public string PostContent
 		{ get; set; }
 

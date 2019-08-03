@@ -13,6 +13,7 @@ CREATE TABLE `BlogComment` (
 
 CREATE TABLE `BlogImage` (
   `BlogImageID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ImageName` varchar(150) DEFAULT NULL,
   `ImagePath` varchar(550) NOT NULL,
   `Size` int(11) DEFAULT NULL,
   `CreatedTime` datetime NOT NULL,

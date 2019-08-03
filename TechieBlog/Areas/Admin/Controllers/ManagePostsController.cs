@@ -23,7 +23,7 @@ namespace TechieBlog.Areas.Admin.Controllers
             var vCurrUser = (BlogUser)Session[Constants.LoggedUser];
             aNewPost.UserID = vCurrUser.UserID;
             bool bResult;
-            if (aNewPost.PostID != 0)
+            if (aNewPost.PostID == 0)
             {
                 bResult = objDataSvc.SaveNewBlog(aNewPost);
             }

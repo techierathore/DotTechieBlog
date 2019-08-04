@@ -1,5 +1,6 @@
 ﻿using BlogEngine.Models;
 using BlogEngine.Services;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace TechieBlog.Areas.Admin.Controllers
@@ -9,7 +10,28 @@ namespace TechieBlog.Areas.Admin.Controllers
         // GET: Admin/ManagePosts
         public ActionResult ShowAllPosts()
         {
-            return View();
+            var vCurrUser = (BlogUser)Session[Constants.LoggedUser];
+            var objDataSvc = new BlogSvc();
+            IEnumerable<Post> vAllPosts;
+            if (vCurrUser.Role == Constants.Admin)
+            {
+                vAllPosts = objDataSvc.GetAllPosts(true,0);
+            }
+            else { vAllPosts = objDataSvc.GetAllPosts(false, vCurrUser.UserID); }
+           
+            return View(vAllPosts);
+        }
+
+        public ActionResult EditPost(long  aPostID)
+        {
+            var objDataSvc = new BlogSvc();
+            Post vPost = objDataSvc.GetPostForEdit(aPostID);
+            if (vPost == null)
+            {
+                return HttpNotFound();
+            }
+            //Send you to NewPost.chtml to save copy same page 
+            return View("NewPost", vPost);
         }
         public ActionResult NewPost()
         {

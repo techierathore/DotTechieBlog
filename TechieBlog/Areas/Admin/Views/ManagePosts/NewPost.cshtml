@@ -1,6 +1,6 @@
-﻿@model BlogEngine.Models.Post
-@using BlogEngine.Models
+﻿@using BlogEngine.Models
 @using BlogEngine.Services
+@model Post
 @{
     ViewBag.Title = "New Post";
 }
@@ -23,7 +23,7 @@
                     </div>
                     <div class="widget-content">
                         <div class="padd">
-                            @using (Html.BeginForm())
+                            @using (Html.BeginForm("NewPost", "ManagePosts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                             {
                                 @Html.AntiForgeryToken()
                                 @Html.HiddenFor(model => model.PostID, new { htmlAttributes = new { @class = "form-control" } })
@@ -37,13 +37,13 @@
                                             <input type="file" class="form-control" id="UploadBlogImg" />
                                             <label class="control-label">Squeezed Image Preview</label>
                                             <img id="imgPreview" height="50" width="50" class="thumbnail" />
-                                            <input type="text" placeholder="Blog Featured Image Url" contenteditable="false" class="form-control" id="FeaturedImage" name="FeaturedImage" />
+                                            @Html.EditorFor(model => model.FeaturedImage, new { htmlAttributes = new { @class = "form-control", placeholder = "Blog Featured Image Url" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label" for="Title">Title </label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" id="Title" name="Title" placeholder="Enter Blog Title">
+                                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Blog Title" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -66,16 +66,25 @@
                                                 var vTags = objDataSvc.GetAllTags();
                                                 foreach (Tag oTag in vTags)
                                                 {
-                                                    <label class="checkbox-inline">
-                                                        <input type="checkbox" id="@oTag.TagName" value="@oTag.TagName" onclick="ChkBoxChecked(this)"> @oTag.TagName
-                                                    </label>
+                                                    if (Model.Tags.Contains(oTag.TagName))
+                                                    {
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" id="@oTag.TagName" checked="checked" value="@oTag.TagName" onclick="ChkBoxChecked(this)"> @oTag.TagName
+                                                        </label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label class="checkbox-inline">
+                                                            <input type="checkbox" id="@oTag.TagName" value="@oTag.TagName" onclick="ChkBoxChecked(this)"> @oTag.TagName
+                                                        </label>
+                                                    }
                                                 }
                                             }
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
-                                            <button class="btn btn-info"><i class="fa fa-save"></i> Save Draft</button>
+                                            <button class="btn btn-info" onclick="SaveDraft()" ><i class="fa fa-save"></i> Save Draft</button>
                                             <button class="btn btn-success" onclick="PubishBlog()"><i class="fa fa-pencil-square"></i> Publish</button>
                                             <button class="btn btn-danger">Trash</button>
                                         </div>
@@ -158,6 +167,9 @@
     }
    function PubishBlog() {
          $("#Published").val("true");
+    }
+   function SaveDraft() {
+         $("#Published").val("false");
     }
     function ChkBoxChecked(aChkBox) {
         var vTags = $('input#Tags').val();

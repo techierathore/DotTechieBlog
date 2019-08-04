@@ -12,6 +12,20 @@ namespace BlogEngine.Services
             return objDataAccess.SelectAll();
         }
 
+        public IEnumerable<Post> GetAllPosts(bool aIsAdmin,long aUserID)
+        {
+            var objDataAccess = new PostDa();
+            if (aIsAdmin)
+            {
+                return objDataAccess.SelectAll();
+            }
+            else return objDataAccess.AllPostsByUserID(aUserID);
+        }
+        public Post GetPostForEdit(long aPostID)
+        {
+            var objDataAccess = new PostDa();
+            return objDataAccess.Select(aPostID);
+        }
         public bool SaveNewBlog(Post aNewBlog)
         {
             var objDataAccess = new PostDa();

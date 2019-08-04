@@ -30,13 +30,13 @@ namespace BlogEngine.Models
 		/// <summary>
 		/// Gets or sets the CreatedTime value.
 		/// </summary>
-		public DateTime CreatedTime
+		public DateTime CreatedOn
 		{ get; set; }
 
 		/// <summary>
 		/// Gets or sets the UpdatedTime value.
 		/// </summary>
-		public DateTime UpdatedTime
+		public DateTime UpdatedOn
 		{ get; set; }
 
 		/// <summary>
@@ -57,16 +57,13 @@ namespace BlogEngine.Models
 		public int CategoryId
 		{ get; set; }
 
-		/// <summary>
-		/// Gets or sets the Frequence value.
-		/// </summary>
-		public int Frequence
-		{ get; set; }
+        public string BlogWriter
+        { get; set; }
 
-		/// <summary>
-		/// Gets or sets the FeaturedImage value.
-		/// </summary>
-		public string FeaturedImage
+        /// <summary>
+        /// Gets or sets the FeaturedImage value.
+        /// </summary>
+        public string FeaturedImage
 		{ get; set; }
         public bool Published
         { get; set; }        

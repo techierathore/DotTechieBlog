@@ -66,11 +66,20 @@
                                                 var vTags = objDataSvc.GetAllTags();
                                                 foreach (Tag oTag in vTags)
                                                 {
-                                                    if (Model.Tags.Contains(oTag.TagName))
+                                                    if (Model.Tags != null)
                                                     {
-                                                        <label class="checkbox-inline">
-                                                            <input type="checkbox" id="@oTag.TagName" checked="checked" value="@oTag.TagName" onclick="ChkBoxChecked(this)"> @oTag.TagName
-                                                        </label>
+                                                        if (Model.Tags.Contains(oTag.TagName))
+                                                        {
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" id="@oTag.TagName" checked="checked" value="@oTag.TagName" onclick="ChkBoxChecked(this)"> @oTag.TagName
+                                                            </label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" id="@oTag.TagName" value="@oTag.TagName" onclick="ChkBoxChecked(this)"> @oTag.TagName
+                                                            </label>
+                                                        }
                                                     }
                                                     else
                                                     {

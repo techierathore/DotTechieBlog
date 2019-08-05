@@ -179,6 +179,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagePostsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TagsNUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -287,6 +288,7 @@
     <Content Include="Areas\Admin\Views\ManagePosts\NewPost.cshtml" />
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Areas\Admin\Views\Image\UploadImage.cshtml" />
+    <Content Include="Areas\Admin\Views\TagsNUsers\ShowAllTags.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\clipboard.min.js" />
     <Content Include="Scripts\imagehideblock.js" />

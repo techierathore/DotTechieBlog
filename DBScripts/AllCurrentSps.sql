@@ -98,3 +98,20 @@ SELECT `PostID`,`Title`,`Abstract`,`PostContent`,`CreatedOn`,`UpdatedOn`,`Publis
 	`Post`.`UserID`,`Tags`,`FeaturedImage` , `BlogUser`.`FirstName` as `BlogWriter`
 FROM TechieBlog.Post inner join TechieBlog.BlogUser where `Post`.`UserID` = `BlogUser`.`UserID`;
 END
+
+CREATE PROCEDURE `TagInsert`(pTagName nvarchar(150))
+BEGIN
+INSERT INTO Tag (`TagName`) VALUES (pTagName);
+END
+
+CREATE PROCEDURE `TagSelect`(pTagID bigint)
+BEGIN
+SELECT `TagID`,	`TagName`
+FROM Tag WHERE `TagID` = pTagID;
+END
+
+CREATE PROCEDURE `TagUpdate`(pTagID bigint,	pTagName nvarchar(150))
+BEGIN
+UPDATE Tag SET `TagName` = pTagName WHERE `TagID` = pTagID;
+END
+

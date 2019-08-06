@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using BlogEngine.Models;
+using BlogEngine.Services;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace TechieBlog.Controllers
 {
@@ -6,7 +9,9 @@ namespace TechieBlog.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var objDataSvc = new BlogSvc();
+            IEnumerable<Post> vAllPosts = objDataSvc.GetAllPosts(true, 0);
+            return View(vAllPosts);
         }
 
         public ActionResult About()
@@ -17,6 +22,13 @@ namespace TechieBlog.Controllers
         }
 
         public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult DetailBlog()
         {
             ViewBag.Message = "Your contact page.";
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -18,17 +17,12 @@ namespace BlogEngine.DataAccess
         public bool Insert(Tag aTag)
         {
             bool blResult = false;
-            if (ValidateValues(aTag))
-            {
-                throw new Exception("exists");
-            }
             using (var vConn = OpenConnection())
             {
                 var vParams = new DynamicParameters();
-                vParams.Add("@TagID", aTag.TagID);
-                vParams.Add("@TagName", aTag.TagName);
-                int iResult = vConn.Execute("TagsInsert", vParams, commandType: CommandType.StoredProcedure);
-                if (iResult == -1) blResult = true;
+                vParams.Add("@pTagName", aTag.TagName);
+                int iResult = vConn.Execute("TagInsert", vParams, commandType: CommandType.StoredProcedure);
+                if (iResult == 1) blResult = true;
             }
             return blResult;
         }
@@ -41,36 +35,25 @@ namespace BlogEngine.DataAccess
         public bool Update(Tag aTag)
         {
             bool blResult = false;
-            if (ValidateValues(aTag))
-            {
-                throw new Exception("exists");
-            }
             using (var vConn = OpenConnection())
             {
                 var vParams = new DynamicParameters();
-                vParams.Add("@TagID", aTag.TagID);
-                vParams.Add("@TagName", aTag.TagName);
-                int iResult = vConn.Execute("TagsUpdate", vParams, commandType: CommandType.StoredProcedure);
-                if (iResult == -1) blResult = true;
+                vParams.Add("@pTagID", aTag.TagID);
+                vParams.Add("@pTagName", aTag.TagName);
+                int iResult = vConn.Execute("TagUpdate", vParams, commandType: CommandType.StoredProcedure);
+                if (iResult == 1) blResult = true;
             }
             return blResult;
         }
 
-        /// <summary>
-        /// Validate the values passed to save the details of Tags class, that wether those values are already present or not.
-        /// </summary>
-        protected bool ValidateValues(Tag aTag)
+        public Tag Select(long TagID)
         {
-            bool blResult = true;
             using (var vConn = OpenConnection())
             {
                 var vParams = new DynamicParameters();
-                vParams.Add("@TagID", aTag.TagID);
-                vParams.Add("@TagName", aTag.TagName);
-                int iResult = vConn.Execute("TagsValidate", vParams, commandType: CommandType.StoredProcedure);
-                if (iResult >= 1) blResult = false;
+                vParams.Add("@pTagID", TagID);
+                return vConn.Query<Tag>("TagSelect", vParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
-            return blResult;
         }
         /// <summary>
         /// Selects all records from the Tags table.

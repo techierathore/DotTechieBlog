@@ -28,11 +28,11 @@ namespace TechieBlog.Controllers
             return View();
         }
 
-        public ActionResult DetailBlog()
+        public ActionResult DetailBlog(long aPostID)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var objDataSvc = new BlogSvc();
+            Post vSelPost = objDataSvc.GetPostForEdit(aPostID);
+            return View(vSelPost);
         }
     }
 }

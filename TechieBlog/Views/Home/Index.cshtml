@@ -3,24 +3,38 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        @foreach (var vItem in Model)
-        {
-            <article class="clearfix">
-                <div class="post-date">
-                    <a href="">@vItem.CreatedOn.ToLongDateString() </a> <span><a href="">11 Comments</a></span>
-                </div>
-                <h2><a href="post-typography.html">@vItem.Title</a></h2>
-                <p>
-                    @vItem.Abstract <a class="" href="post-typography.html">Read more</a>
-                </p>
-            </article>
-        }
-        <div class="paging clearfix">
-            <a class="btn pull-left" href="#"><i class="icon-arrow-left2 left"></i><span>Older</span><span class="hidden-xs"> Posts</span></a>
-            <a class="btn pull-right" href="#"><span>Newer</span><span class="hidden-xs"> Posts</span><i class="icon-arrow-right2 right"></i></a>
+<section id="hero" class="light-typo">
+    <div id="cover-image" class="image-bg animated fadeIn"></div>
+    <div class="container welcome-content">
+        <div class="middle-text">
+            <h1>TechieRathore</h1>
+            <h2><b>Key Lime</b> is a blog theme built with Bootstrap <br>by <b>Angelo Studio</b></h2>
+            <a class="btn smooth-scroll" href="#start">Get Stated</a>
         </div>
-
     </div>
-</div><!-- end row -->
+</section>
+<div id="start" class="container content">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            @foreach (var vItem in Model)
+            {
+                <article class="clearfix">
+                    <div class="post-date">
+                        <a href="">@vItem.CreatedOn.ToLongDateString() </a> <span><a href="">11 Comments</a></span>
+                    </div>
+                    <h2><a href="post-typography.html">@vItem.Title</a></h2>
+                    <p>
+                        @vItem.Abstract <a class="" href="@Url.Action("DetailBlog", "Home", new { aPostID = vItem.PostID })">Read more</a>
+                    </p>
+                </article>
+            }
+            <div class="paging clearfix">
+                <a class="btn pull-left" href="#"><i class="icon-arrow-left2 left"></i><span>Older</span><span class="hidden-xs"> Posts</span></a>
+                <a class="btn pull-right" href="#"><span>Newer</span><span class="hidden-xs"> Posts</span><i class="icon-arrow-right2 right"></i></a>
+            </div>
+
+        </div>
+    </div>
+    <!-- end row -->
+</div>
+

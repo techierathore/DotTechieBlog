@@ -1,5 +1,5 @@
-﻿@using BlogEngine.Models
-@model IEnumerable<Post>
+﻿@using BlogEngine.ViewModels
+@model BlogList
 @{
     ViewBag.Title = "Home Page";
 }
@@ -16,7 +16,7 @@
 <div id="start" class="container content">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            @foreach (var vItem in Model)
+            @foreach (var vItem in Model.BlogPosts)
             {
                 <article class="clearfix">
                     <div class="post-date">
@@ -28,11 +28,31 @@
                     </p>
                 </article>
             }
-            <div class="paging clearfix">
-                <a class="btn pull-left" href="#"><i class="icon-arrow-left2 left"></i><span>Older</span><span class="hidden-xs"> Posts</span></a>
-                <a class="btn pull-right" href="#"><span>Newer</span><span class="hidden-xs"> Posts</span><i class="icon-arrow-right2 right"></i></a>
-            </div>
+            @if (Model.Pager.EndPage > 1)
+            {
 
+                <ul class="pagination">
+                    @if (Model.Pager.CurrentPage > 1)
+                    {
+                        <li>
+                            <a href="~/Home/Index">First</a>
+                        </li>
+                        <li>
+                            <a href="~/Home/Index?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                        </li>
+                    }
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                        <li>
+                            <a href="~/Home/Index?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                        </li>
+                        <li>
+                            <a href="~/Home/Index?page=@(Model.Pager.TotalPages)">Last</a>
+                        </li>
+                    }
+                </ul>
+            }
         </div>
     </div>
     <!-- end row -->

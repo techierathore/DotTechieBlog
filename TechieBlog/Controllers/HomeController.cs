@@ -1,6 +1,5 @@
 ﻿using BlogEngine.Models;
 using BlogEngine.Services;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace TechieBlog.Controllers
@@ -9,11 +8,17 @@ namespace TechieBlog.Controllers
     {
         public ActionResult Index()
         {
-            var objDataSvc = new BlogSvc();
-            IEnumerable<Post> vAllPosts = objDataSvc.GetAllPosts(true, 0);
+            var objDataSvc = new BlogHomeSvc();
+            var vAllPosts = objDataSvc.LoadHomePage().BlogPosts;
             return View(vAllPosts);
         }
 
+        public ActionResult PagedIndex(int? iPageNo)
+        {
+            var objDataSvc = new BlogHomeSvc();
+            var vAllPosts = objDataSvc.GetAllBlogs(iPageNo);
+            return View(vAllPosts);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

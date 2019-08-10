@@ -92,5 +92,13 @@ namespace BlogEngine.DataAccess
             }
         }
 
+        public List<Post> GetPostsList()
+        {
+            using (var vConn = OpenConnection())
+            {
+                return vConn.Query<Post>("SelectAllPosts", commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
     }
 }

@@ -1,5 +1,7 @@
 ﻿using BlogEngine.DataAccess;
+using BlogEngine.Models;
 using BlogEngine.ViewModels;
+using System.Collections.Generic;
 
 namespace BlogEngine.Services
 {
@@ -32,6 +34,18 @@ namespace BlogEngine.Services
                 Pager = vPager
             };
             return vPagedList;
+        }
+        public Post GetBlogForCounts()
+        {
+            var objDataSvc = new PostDa();
+            var vPostCount = objDataSvc.GetTheCounts();
+            return vPostCount;
+        }
+        public IEnumerable<Post> GetRecentBlogs()
+        {
+            var objDataSvc = new PostDa();
+            var vRecentBlogs = objDataSvc.GetPostsList(3, 0);
+            return vRecentBlogs;
         }
     }
 }

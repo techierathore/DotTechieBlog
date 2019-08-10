@@ -32,18 +32,18 @@
             {
                 if (Model.Pager.CurrentPage > 1)
                 {
-                <div class="paging clearfix">
-                    <a class="btn pull-left" href="@Url.Action("Index", "Home")"><i class="icon-arrow-left2 left"></i><span>Newer</span><span class="hidden-xs"> Posts</span></a>
-                    <a class="btn pull-right" href="@Url.Action("Index", "Home", new { PageNo = (Model.Pager.CurrentPage - 1) })"><span>Older</span><span class="hidden-xs"> Posts</span><i class="icon-arrow-right2 right"></i></a>
-                </div>
+                    <div class="paging clearfix">
+                        <a class="btn pull-left" href="@Url.Action("Index", "Home")"><i class="icon-arrow-left2 left"></i><span>Newer</span><span class="hidden-xs"> Posts</span></a>
+                        <a class="btn pull-right" href="@Url.Action("Index", "Home", new { PageNo = (Model.Pager.CurrentPage - 1) })"><span>Older</span><span class="hidden-xs"> Posts</span><i class="icon-arrow-right2 right"></i></a>
+                    </div>
                 }
 
                 if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                 {
-                <div class="paging clearfix">
-                    <a class="btn pull-left" href="@Url.Action("Index", "Home", new { PageNo = (Model.Pager.CurrentPage + 1) })"><i class="icon-arrow-left2 left"></i><span>Newer</span><span class="hidden-xs"> Posts</span></a>
-                    <a class="btn pull-right" href="@Url.Action("Index", "Home", new { PageNo = (Model.Pager.TotalPages) })"><span>Older</span><span class="hidden-xs"> Posts</span><i class="icon-arrow-right2 right"></i></a>
-                </div>
+                    <div class="paging clearfix">
+                        <a class="btn pull-left" href="@Url.Action("Index", "Home", new { PageNo = (Model.Pager.CurrentPage + 1) })"><i class="icon-arrow-left2 left"></i><span>Newer</span><span class="hidden-xs"> Posts</span></a>
+                        <a class="btn pull-right" href="@Url.Action("Index", "Home", new { PageNo = (Model.Pager.TotalPages) })"><span>Older</span><span class="hidden-xs"> Posts</span><i class="icon-arrow-right2 right"></i></a>
+                    </div>
                 }
             }
         </div>
@@ -51,3 +51,9 @@
     <!-- end row -->
 </div>
 
+@section FooterDetails
+{
+    @Html.Action("Counts", "Home")
+    @Html.Action("RecentBlogs", "Home")
+    @Html.Action("Tags", "Home") 
+}

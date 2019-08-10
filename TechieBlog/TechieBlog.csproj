@@ -413,6 +413,9 @@
     <Content Include="Scripts\summernote\summernote-lite.js.map" />
     <Content Include="Scripts\summernote\summernote.js.map" />
     <Content Include="Views\Home\DetailBlog.cshtml" />
+    <Content Include="Views\Home\Counts.cshtml" />
+    <Content Include="Views\Home\RecentBlogs.cshtml" />
+    <Content Include="Views\Home\Tags.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

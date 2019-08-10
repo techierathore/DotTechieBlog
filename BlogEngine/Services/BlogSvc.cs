@@ -31,7 +31,6 @@ namespace BlogEngine.Services
             var objDataAccess = new PostDa();
             return objDataAccess.Insert(aNewBlog);       
         }
-
         public bool UpdateBlog(Post aNewBlog)
         {
             var objDataAccess = new PostDa();

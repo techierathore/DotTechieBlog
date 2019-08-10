@@ -1,0 +1,18 @@
+﻿@using BlogEngine.Models
+@model Post
+<div class="col-sm-4 col-md-4 footer-widget">
+    <h3>Statistics</h3>
+
+    <span>Even we sometimes loose track of how many articles we actually have here. This one helps: </span>
+
+    <div class="stats">
+        <div class="line">
+            <span class="counter">@Model.BlogCount</span>
+            <span class="caption">Articles</span>
+        </div>
+        <div class="line">
+            <span class="counter">@Model.CommentCount</span>
+            <span class="caption">Comments</span>
+        </div>
+    </div>
+</div>

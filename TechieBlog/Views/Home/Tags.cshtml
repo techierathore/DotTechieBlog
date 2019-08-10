@@ -1,0 +1,9 @@
+﻿@using BlogEngine.Models
+@model IEnumerable<Tag>
+    <div class="col-sm-4 col-md-4 footer-widget clearfix">
+        <h3>Tags</h3>
+        <ul class="tags">
+            @foreach (var vItem in Model)
+            {<li><a href="#">vItem.TagName</a></li> }            
+        </ul>
+    </div>

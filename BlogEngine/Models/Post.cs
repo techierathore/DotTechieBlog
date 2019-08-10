@@ -66,6 +66,11 @@ namespace BlogEngine.Models
         public string FeaturedImage
 		{ get; set; }
         public bool Published
-        { get; set; }        
+        { get; set; }
+
+        public long CommentCount
+        { get; set; }
+        public int BlogCount
+        { get; set; }
     }
 }

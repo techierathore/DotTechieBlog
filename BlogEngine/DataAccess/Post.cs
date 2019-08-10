@@ -92,13 +92,23 @@ namespace BlogEngine.DataAccess
             }
         }
 
-        public List<Post> GetPostsList()
+        public IEnumerable<Post> GetPostsList(int PageSize, int OffSet)
         {
             using (var vConn = OpenConnection())
             {
-                return vConn.Query<Post>("SelectAllPosts", commandType: CommandType.StoredProcedure).ToList();
+                var vParams = new DynamicParameters();
+                vParams.Add("@aPageSize", PageSize);
+                vParams.Add("@aOffset", OffSet);
+                return vConn.Query<Post>("GetPagedBlogList", vParams, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
+        public Post GetTheCounts()
+        {
+            using (var vConn = OpenConnection())
+            {
+                return vConn.Query<Post>("GetTheCounts", commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
     }
 }

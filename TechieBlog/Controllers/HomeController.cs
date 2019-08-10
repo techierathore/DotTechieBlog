@@ -6,17 +6,10 @@ namespace TechieBlog.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int? PageNo)
         {
             var objDataSvc = new BlogHomeSvc();
-            var vAllPosts = objDataSvc.LoadHomePage().BlogPosts;
-            return View(vAllPosts);
-        }
-
-        public ActionResult PagedIndex(int? iPageNo)
-        {
-            var objDataSvc = new BlogHomeSvc();
-            var vAllPosts = objDataSvc.GetAllBlogs(iPageNo);
+            var vAllPosts = objDataSvc.GetAllBlogs(PageNo);
             return View(vAllPosts);
         }
         public ActionResult About()

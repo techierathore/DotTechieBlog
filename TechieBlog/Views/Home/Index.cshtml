@@ -20,7 +20,7 @@
             {
                 <article class="clearfix">
                     <div class="post-date">
-                        <a href="">@vItem.CreatedOn.ToLongDateString() </a> <span><a href="">11 Comments</a></span>
+                        <a href="">@vItem.CreatedOn.ToLongDateString() </a> <span>@vItem.CommentCount Comments</span>
                     </div>
                     <h2><a href="post-typography.html">@vItem.Title</a></h2>
                     <p>
@@ -30,28 +30,21 @@
             }
             @if (Model.Pager.EndPage > 1)
             {
+                if (Model.Pager.CurrentPage > 1)
+                {
+                <div class="paging clearfix">
+                    <a class="btn pull-left" href="@Url.Action("Index", "Home")"><i class="icon-arrow-left2 left"></i><span>Newer</span><span class="hidden-xs"> Posts</span></a>
+                    <a class="btn pull-right" href="@Url.Action("Index", "Home", new { PageNo = (Model.Pager.CurrentPage - 1) })"><span>Older</span><span class="hidden-xs"> Posts</span><i class="icon-arrow-right2 right"></i></a>
+                </div>
+                }
 
-                <ul class="pagination">
-                    @if (Model.Pager.CurrentPage > 1)
-                    {
-                        <li>
-                            <a href="~/Home/Index">First</a>
-                        </li>
-                        <li>
-                            <a href="~/Home/Index?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
-                        </li>
-                    }
-
-                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-                    {
-                        <li>
-                            <a href="~/Home/Index?page=@(Model.Pager.CurrentPage + 1)">Next</a>
-                        </li>
-                        <li>
-                            <a href="~/Home/Index?page=@(Model.Pager.TotalPages)">Last</a>
-                        </li>
-                    }
-                </ul>
+                if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                <div class="paging clearfix">
+                    <a class="btn pull-left" href="@Url.Action("Index", "Home", new { PageNo = (Model.Pager.CurrentPage + 1) })"><i class="icon-arrow-left2 left"></i><span>Newer</span><span class="hidden-xs"> Posts</span></a>
+                    <a class="btn pull-right" href="@Url.Action("Index", "Home", new { PageNo = (Model.Pager.TotalPages) })"><span>Older</span><span class="hidden-xs"> Posts</span><i class="icon-arrow-right2 right"></i></a>
+                </div>
+                }
             }
         </div>
     </div>

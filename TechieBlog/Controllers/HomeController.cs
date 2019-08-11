@@ -18,25 +18,6 @@ namespace TechieBlog.Controllers
             Post vSelPost = objDataSvc.GetPostForEdit(aPostID);
             return View(vSelPost);
         }
-
-        public ActionResult Counts()
-        {
-            var objDataSvc = new BlogHomeSvc();
-            Post vSelPost = objDataSvc.GetBlogForCounts();
-            return View(vSelPost);
-        }
-        public ActionResult RecentBlogs()
-        {
-            var objDataSvc = new BlogHomeSvc();
-            var vSelPost = objDataSvc.GetRecentBlogs();            
-            return View(vSelPost);
-        }
-        public ActionResult Tags()
-        {
-            var objDataSvc = new BlogSvc();
-            var vTags = objDataSvc.GetAllTags();
-            return View(vTags);
-        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

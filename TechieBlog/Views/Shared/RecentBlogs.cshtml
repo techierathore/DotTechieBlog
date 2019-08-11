@@ -1,13 +1,13 @@
 ﻿@using BlogEngine.Models
 @model IEnumerable<Post>
 
-    <div class="col-sm-4 col-md-4 footer-widget">
-        <h3>Recent posts</h3>
-        <div class="post-recent-widget">
-            <div class="row">
-                <div class="col-sm-12">
-                    @foreach (var vItem in Model)
-                    {
+<div class="col-sm-4 col-md-4 footer-widget">
+    <h3>Recent posts</h3>
+    <div class="post-recent-widget">
+        <div class="row">
+            <div class="col-sm-12">
+                @foreach (var vItem in Model)
+                {
                     <div class="media">
                         <a class="pull-left" href="post-video.html"><img class="media-object" src="img/img2.jpg" width="80" alt=""></a>
                         <div class="media-body">
@@ -15,10 +15,8 @@
                             <p class="post-date">@vItem.CreatedOn.ToLongDateString()</p>
                         </div>
                     </div>
-                    }               
-                </div>
+                }
             </div>
         </div>
     </div>
-    
-
+</div>

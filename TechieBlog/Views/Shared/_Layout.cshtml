@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@using BlogEngine.Models;
+@using BlogEngine.Services;
+<!doctype html>
 <html>
 <head>
     <title>@ViewBag.Title - TechieRathore</title>
@@ -50,25 +52,33 @@
         </div>
         @RenderBody()
 
-    </div>
-    <footer>
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    @RenderSection("FooterDetails", false)        
+        <footer>
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        @{ var objDataSvc = new BlogHomeSvc();
+                            Post vSelPost = objDataSvc.GetBlogForCounts();
+                            var vRecentBlogs = objDataSvc.GetRecentBlogs();
+                            var objTagDataSvc = new BlogSvc();
+                            var vTags = objTagDataSvc.GetAllTags();
+                            @Html.Partial("BlogStats", vSelPost)
+                            @Html.Partial("RecentBlogs", vRecentBlogs)
+                            @Html.Partial("TagLinks", vTags)
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="copyright">
-            <div class="container">
-                <p class="pull-left">Designed by <a href="http://www.xltants.com" rel="nofollow">Xltants IT Solutions</a></p>
-                <ul class="social-links pull-right">
-                    <li><a href="https://twitter.com/xltants"><i class="icon-twitter"></i></a></li>
-                    <li><a href="https://www.facebook.com/xltants/"><i class="icon-facebook"></i></a></li>
-                </ul>
+            <div class="copyright">
+                <div class="container">
+                    <p class="pull-left">Designed by <a href="http://www.xltants.com" rel="nofollow">Xltants IT Solutions</a></p>
+                    <ul class="social-links pull-right">
+                        <li><a href="https://twitter.com/xltants"><i class="icon-twitter"></i></a></li>
+                        <li><a href="https://www.facebook.com/xltants/"><i class="icon-facebook"></i></a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
     <div class="modal fade login" id="loginModal" aria-hidden="true">
         <div class="modal-dialog login">
             <div class="modal-content">

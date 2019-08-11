@@ -1,5 +1,6 @@
 ﻿using BlogEngine.Models;
 using BlogEngine.Services;
+using BlogEngine.ViewModels;
 using System.Web.Mvc;
 
 namespace TechieBlog.Controllers
@@ -14,8 +15,8 @@ namespace TechieBlog.Controllers
         }
         public ActionResult DetailBlog(long aPostID)
         {
-            var objDataSvc = new BlogSvc();
-            Post vSelPost = objDataSvc.GetPostForEdit(aPostID);
+            var objDataSvc = new BlogHomeSvc();
+            DisplayBlog vSelPost = objDataSvc.GetDisplayBlog(aPostID);
             return View(vSelPost);
         }
         public ActionResult About()

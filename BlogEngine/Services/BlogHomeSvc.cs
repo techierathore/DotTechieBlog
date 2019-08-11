@@ -7,7 +7,7 @@ namespace BlogEngine.Services
 {
     public class BlogHomeSvc
     {
-        private const int _PageSize = 5;
+        private const int _PageSize = 4;
         public BlogList Index()
         {
             var objDataSvc = new PostDa();
@@ -46,6 +46,18 @@ namespace BlogEngine.Services
             var objDataSvc = new PostDa();
             var vRecentBlogs = objDataSvc.GetPostsList(3, 0);
             return vRecentBlogs;
+        }
+        public DisplayBlog GetDisplayBlog(long aPostID)
+        {
+            var objDataAccess = new PostDa();
+            var vSelPost = objDataAccess.Select(aPostID);
+            if (vSelPost == null) return null;
+            BlogComment objNewComment = new BlogComment() { PostID= vSelPost.PostID }; 
+            var objReturn = new DisplayBlog() {
+                BlogPost = vSelPost,
+                NewComment = objNewComment
+            };            
+            return objReturn;
         }
     }
 }

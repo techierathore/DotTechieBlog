@@ -47,6 +47,7 @@ namespace BlogEngine.Models
 		public bool Publish
 		{ get; set; }
 
-
-	}
+        public string CommenterSite
+        { get; set; }
+    }
 }

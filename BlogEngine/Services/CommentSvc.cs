@@ -6,6 +6,7 @@ namespace BlogEngine.Services
 {
     public class CommentSvc
     {
+        private const int _PageSize = Constants.ListPageSize;
         public bool SaveComment(BlogComment Comment)
         {
             var objDataAccess = new CommentDa();
@@ -21,7 +22,7 @@ namespace BlogEngine.Services
             var objDataAccess = new CommentDa();
             return objDataAccess.ApproveBlogComment(BlogCommentID);
         }
-        private const int _PageSize = Constants.ListPageSize;
+     
         public CommentList GetAllComments(int? PageNo)
         {
             PageNo = PageNo != null ? PageNo : 1;

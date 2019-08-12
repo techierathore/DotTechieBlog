@@ -1,7 +1,86 @@
-﻿
+﻿@using BlogEngine.ViewModels
+@model BlogImageList
 @{
-    ViewBag.Title = "ImageList";
+    ViewBag.Title = "Image List";
 }
+<div class="mainbar">
+    <!-- Matter -->
+    <div class="matter">
+        <div class="container">
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget wviolet">
+                        <div class="widget-head">
+                            <div class="pull-left">All Comments</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table class="table table-bordered ">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Path</th>
+                                            <th>Size</th>
+                                            <th>Created On</th>
 
-<h2>ImageList</h2>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var vItem in Model.BlogImages)
+                                        {
+                                        <tr>
+                                            <td>@vItem.ImageName</td>
+                                            <td>@vItem.ImagePath</td>
+                                            <td>@vItem.Size</td>
+                                            <td>@vItem.CreatedTime.ToLongDateString()</td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="widget-foot">
+                            @if (Model.Pager.EndPage > 1)
+                            {
+                                <ul class="pagination pull-right">
+                                    @if (Model.Pager.CurrentPage > 1)
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("ImageList", "Image")">First</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("ImageList", "Image", new { PageNo = (Model.Pager.CurrentPage - 1) })">Prev</a>
+                                        </li>
+                                    }
+
+                                    @for (var vPageNo = Model.Pager.StartPage; vPageNo <= Model.Pager.EndPage; vPageNo++)
+                                    {
+                                        <li class="@(vPageNo == Model.Pager.CurrentPage ? "active" : "")">
+                                            <a href="@Url.Action("ImageList", "Image", new { PageNo = vPageNo })">@vPageNo</a>
+                                        </li>
+                                    }
+
+                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("ImageList", "Image", new { PageNo = (Model.Pager.CurrentPage + 1) })">Next</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("ImageList", "Image", new { PageNo = Model.Pager.TotalPages })">Last</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Matter ends -->
+</div><!--/ Mainbar ends -->
+<div class="clearfix"></div>
 

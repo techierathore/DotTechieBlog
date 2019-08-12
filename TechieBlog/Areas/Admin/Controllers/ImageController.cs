@@ -9,9 +9,11 @@ namespace TechieBlog.Areas.Admin.Controllers
 {
     public class ImageController : Controller
     {
-        public ActionResult ImageList()
+        public ActionResult ImageList(int? PageNo)
         {
-            return View();
+            var objDataSvc = new ImageSvc();
+            var vAllPosts = objDataSvc.GetAllImages(PageNo);
+            return View(vAllPosts);
         }
         public ActionResult UploadImage()
         {

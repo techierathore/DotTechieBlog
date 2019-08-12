@@ -188,3 +188,10 @@ SELECT  (Select count(*) From TechieBlog.Post WHERE TechieBlog.Post.Published =1
 FROM TechieBlog.Post OutErr Where OutErr.Published =1
 Order By OutErr.PostID DESC LIMIT 1 ;
 END
+
+CREATE PROCEDURE `GetPagedBlogImages`(aPageSize int, aOffset int)
+BEGIN
+SELECT `BlogImageID`,`ImageName`,`ImagePath`,`Size`,`CreatedTime`,`UserID`
+FROM BlogImage Order By `BlogImageID` DESC LIMIT aPageSize OFFSET aOffset ;
+END
+

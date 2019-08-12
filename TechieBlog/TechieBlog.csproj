@@ -417,6 +417,7 @@
     <Content Include="Views\Shared\BlogStats.cshtml" />
     <Content Include="Views\Shared\RecentBlogs.cshtml" />
     <Content Include="Views\Shared\TagLinks.cshtml" />
+    <Content Include="Views\Home\SaveComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

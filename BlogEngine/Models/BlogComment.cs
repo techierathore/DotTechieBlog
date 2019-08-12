@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlogEngine.Models
 {
@@ -20,25 +21,29 @@ namespace BlogEngine.Models
 		/// <summary>
 		/// Gets or sets the ComntDateTime value.
 		/// </summary>
-		public DateTime ComntDateTime
+		public DateTime GivenOn
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Name value.
+        /// </summary>
+        [Required(ErrorMessage = "Name is required")]
+        public string GivenBy
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Email value.
+        /// </summary>
+        [Required(ErrorMessage = "Email is required")]
+        [RegularExpression(@"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", ErrorMessage = "Please Enter Correct Email Address")]
+        public string Email
 		{ get; set; }
 
-		/// <summary>
-		/// Gets or sets the Name value.
-		/// </summary>
-		public string Name
-		{ get; set; }
-
-		/// <summary>
-		/// Gets or sets the Email value.
-		/// </summary>
-		public string Email
-		{ get; set; }
-
-		/// <summary>
-		/// Gets or sets the Comment value.
-		/// </summary>
-		public string Comment
+        /// <summary>
+        /// Gets or sets the Comment value.
+        /// </summary>
+        [Required(ErrorMessage = "Comment is required")]
+        public string Comment
 		{ get; set; }
 
 		/// <summary>
@@ -47,7 +52,5 @@ namespace BlogEngine.Models
 		public bool Publish
 		{ get; set; }
 
-        public string CommenterSite
-        { get; set; }
     }
 }

@@ -133,3 +133,19 @@ SELECT `PostID`,`Title`,`Abstract`,`PostContent`,
 FROM TechieBlog.Post OutErr Where OutErr.Published =1
 Order By OutErr.PostID DESC LIMIT 1 ;
 END
+
+CREATE PROCEDURE `BlogCommentInsert` (
+	pPostID bigint,
+    pGivenOn datetime,
+	pGivenBy varchar(350),
+    pEmail varchar(350),
+	pCommenterSite varchar(350),
+    pComment varchar(850), 
+	pPublish BOOLEAN
+)
+BEGIN
+INSERT INTO BlogComment
+(`PostID`,`GivenOn`,`GivenBy`,`Email`,`CommenterSite`,`Comment`,`Publish`)
+VALUES
+(pPostID,pGivenOn,pGivenBy,pEmail,pCommenterSite,pComment,pPublish);
+END

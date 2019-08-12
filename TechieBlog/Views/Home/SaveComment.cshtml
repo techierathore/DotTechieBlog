@@ -1,0 +1,36 @@
+﻿@using BlogEngine.ViewModels
+@model CommentMessage
+@{
+    ViewBag.Title = "Comment Saved";
+}
+
+    <section id="hero" class="light-typo">
+        <div id="cover-image" class="image-bg2 animated fadeIn"></div>
+        <div class="container welcome-content">
+            <div class="middle-text">
+                <h1>@Model.PostTitle</h1>
+            </div>
+        </div>
+    </section>
+    <section id="breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <ol class="breadcrumb">
+                        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li class="active">@Model.PostTitle</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h3>Hi @Model.GivenBy</h3>
+                <p>@Model.Message</p>
+                <a class="btn btn-block" href="@Url.Action("DetailBlog", "Home", new { aPostID = Model.PostID })">Go Back to Blog</a>
+            </div>
+        </div>
+    </div>
+

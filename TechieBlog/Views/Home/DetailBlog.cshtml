@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <ol class="breadcrumb">
-                    <li><a href="@Url.Action("Index", "Home")">Blog</a></li>                    
+                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
                     <li class="active">@Model.BlogPost.Title</li>
                 </ol>
             </div>
@@ -43,52 +43,50 @@
                 </div>
             </div>
             <h3>Add a new comment</h3>
-            <form action="index.html" method="post" novalidate class="myform" id="mycomment">
+            @using (Html.BeginForm("SaveComment", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.BlogPost.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.NewComment.PostID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 wow fadeInUp">
                         <div class="form-group">
-                            <label class="control-label" for="contact-message">Join the discussion...</label>
                             <div class="controls">
-                                <textarea name="comments" placeholder="Join the discussion..." class="form-control input-lg requiredField" rows="3" data-error-empty="Please enter comment"></textarea>
+                                @Html.TextAreaFor(model => model.NewComment.Comment, new { @class = "form-control input-lg requiredField", @row = 3, placeholder = "Join the discussion...." })
+                                @Html.ValidationMessageFor(model => model.NewComment.Comment, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Name</label>
                                     <div class="controls">
-                                        <input name="contactName" placeholder="Name" class="form-control input-lg requiredField " type="text" data-error-empty="Please enter name">
+                                        @Html.TextBoxFor(model => model.NewComment.GivenBy, new { @class = "form-control input-lg requiredField", placeholder = "Name" })
+                                        @Html.ValidationMessageFor(model => model.NewComment.GivenBy, "", new { @class = "text-danger" })
+                                        &nbsp;
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label" for="contact-mail">Email</label>
                                     <div class=" controls">
-                                        <input name="email" placeholder="Email" class="form-control input-lg requiredField" type="email" data-error-empty="Please enter email" data-error-invalid="Invalid email address">
+                                        @Html.TextBoxFor(model => model.NewComment.Email, new { @class = "form-control input-lg requiredField", placeholder = "Email" })
+                                        @Html.ValidationMessageFor(model => model.NewComment.Email, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Website</label>
-                                    <div class="controls">
-                                        <input name="contactName" placeholder="Website" class="form-control input-lg " type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <button name="submit" type="submit" class="btn btn-block" data-error-message="Error!" data-sending-message="Sending..." data-ok-message="Comment Sent">Send Comment</button>
-                                    <input type="hidden" name="submitted" id="submitted3" value="true">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+
+            }
             <h3>11 Comments</h3>
             <div class="media">
                 <hr>

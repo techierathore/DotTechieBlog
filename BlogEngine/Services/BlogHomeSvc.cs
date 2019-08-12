@@ -7,20 +7,7 @@ namespace BlogEngine.Services
 {
     public class BlogHomeSvc
     {
-        private const int _PageSize = 4;
-        public BlogList Index()
-        {
-            var objDataSvc = new PostDa();
-            var vGetForHome = objDataSvc.GetPostsList(_PageSize, 0);
-            var vPostCount = objDataSvc.GetTheCounts().BlogCount;
-            var vPager = new Pager(vPostCount, 1, _PageSize);
-            var vPagedList = new BlogList
-            {
-                BlogPosts = vGetForHome,
-                Pager = vPager
-            };
-            return vPagedList;
-        }
+        private const int _PageSize = Constants.BlogListPageSize;
         public BlogList GetAllBlogs(int? PageNo)
         {
             var objDataSvc = new PostDa();
@@ -49,12 +36,15 @@ namespace BlogEngine.Services
         }
         public DisplayBlog GetDisplayBlog(long aPostID)
         {
+            var objCommentDa = new CommentDa();
             var objDataAccess = new PostDa();
             var vSelPost = objDataAccess.Select(aPostID);
             if (vSelPost == null) return null;
+            var vPostComments = objCommentDa.GetPostComments(vSelPost.PostID);
             BlogComment objNewComment = new BlogComment() { PostID= vSelPost.PostID }; 
             var objReturn = new DisplayBlog() {
                 BlogPost = vSelPost,
+                 BlogComments = vPostComments,
                 NewComment = objNewComment
             };            
             return objReturn;

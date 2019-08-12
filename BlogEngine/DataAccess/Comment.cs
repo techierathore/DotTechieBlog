@@ -31,15 +31,56 @@ namespace BlogEngine.DataAccess
             return blResult;
         }
 
-
-        /// <summary>
-        /// Selects all records from the Comments table.
-        /// </summary>
-        public IEnumerable<BlogComment> SelectAll()
+        public bool ApproveBlogComment(long BlogCommentID)
+        {
+            bool blResult = false;
+            using (var vConn = OpenConnection())
+            {
+                var vParams = new DynamicParameters();
+                vParams.Add("@BlogCommentID", BlogCommentID);
+                int iResult = vConn.Execute("ApproveBlogComment", vParams, commandType: CommandType.StoredProcedure);
+                if (iResult == 1) blResult = true;
+            }
+            return blResult;
+        }
+        public BlogComment Select(long BlogCommentID)
         {
             using (var vConn = OpenConnection())
             {
-                return vConn.Query<BlogComment>("CommentsSelectAll", commandType: CommandType.StoredProcedure).ToList();
+                var vParams = new DynamicParameters();
+                vParams.Add("@BlogCommentID", BlogCommentID);
+                return vConn.Query<BlogComment>("BlogCommentSelect", vParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
+        public IEnumerable<BlogComment> GetPagedUnAppComments(int PageSize, int OffSet)
+        {
+            using (var vConn = OpenConnection())
+            {
+                var vParams = new DynamicParameters();
+                vParams.Add("@aPageSize", PageSize);
+                vParams.Add("@aOffset", OffSet);
+                return vConn.Query<BlogComment>("GetPagedUnAppComments", vParams, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
+        public IEnumerable<BlogComment> GetPagedComments(int PageSize, int OffSet)
+        {
+            using (var vConn = OpenConnection())
+            {
+                var vParams = new DynamicParameters();
+                vParams.Add("@aPageSize", PageSize);
+                vParams.Add("@aOffset", OffSet);
+                return vConn.Query<BlogComment>("GetPagedComments", vParams, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+        public IEnumerable<BlogComment> GetPostComments(long BlogPostID)
+        {
+            using (var vConn = OpenConnection())
+            {
+                var vParams = new DynamicParameters();
+                vParams.Add("@BlogPostID", BlogPostID);
+                return vConn.Query<BlogComment>("GetPostComments", vParams, commandType: CommandType.StoredProcedure).ToList();
             }
         }
         public AdminCounts GetAdminCounts()

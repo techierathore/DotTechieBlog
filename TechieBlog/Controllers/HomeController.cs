@@ -1,5 +1,4 @@
-﻿using BlogEngine.Models;
-using BlogEngine.Services;
+﻿using BlogEngine.Services;
 using BlogEngine.ViewModels;
 using System.Web.Mvc;
 

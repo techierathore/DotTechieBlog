@@ -2,9 +2,9 @@
 {
     public class AdminCounts
     {
-        public long CommentCount
+        public int CommentCount
         { get; set; }
-        public long UnAppComments
+        public int UnAppComments
         { get; set; }
         public int BlogCount
         { get; set; }

@@ -1,7 +1,92 @@
-﻿
+﻿@using BlogEngine.ViewModels
+@model CommentList
 @{
-    ViewBag.Title = "UnApprovedList";
+    ViewBag.Title = "UnApproved Comments";
 }
+<div class="mainbar">
+    <!-- Matter -->
+    <div class="matter">
+        <div class="container">
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget wviolet">
+                        <div class="widget-head">
+                            <div class="pull-left">UnApproved Comments</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table class="table table-bordered ">
+                                    <thead>
+                                        <tr>
+                                            <th>Comment</th>
+                                            <th>Given By</th>
+                                            <th>Given On</th>
+                                            <th>Approved</th>
+                                            <th>Approve/Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var vItem in Model.BlogComments)
+                                        {
+                                            <tr>
+                                                <td>@vItem.Comment</td>
+                                                <td>@vItem.GivenBy</td>
+                                                <td>@vItem.GivenOn.ToLongDateString()</td>
+                                                <td>@vItem.Published</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-warning" href="@Url.Action("ApproveComment", "Comments", new { BlogCommentID = vItem.CommentID })">
+                                                        <i class="fa fa-check"></i>
+                                                    </a>
+                                                    <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i> </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="widget-foot">
+                            @if (Model.Pager.EndPage > 1)
+                            {
+                                <ul class="pagination pull-right">
+                                    @if (Model.Pager.CurrentPage > 1)
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("UnApprovedList", "Comments")">First</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("UnApprovedList", "Comments", new { PageNo = (Model.Pager.CurrentPage - 1) })">Prev</a>
+                                        </li>
+                                    }
 
-<h2>UnApprovedList</h2>
+                                    @for (var vPageNo = Model.Pager.StartPage; vPageNo <= Model.Pager.EndPage; vPageNo++)
+                                    {
+                                <li class="@(vPageNo == Model.Pager.CurrentPage ? "active" : "")">
+                                    <a href="@Url.Action("UnApprovedList", "Comments", new { PageNo = vPageNo })">@vPageNo</a>
+                                </li>
+                                    }
+
+                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("UnApprovedList", "Comments", new { PageNo = (Model.Pager.CurrentPage + 1) })">Next</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("UnApprovedList", "Comments", new { PageNo = Model.Pager.TotalPages })">Last</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Matter ends -->
+</div><!--/ Mainbar ends -->
+<div class="clearfix"></div>
 

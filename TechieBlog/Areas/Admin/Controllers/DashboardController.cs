@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using BlogEngine.Services;
+using System.Web.Mvc;
 
 namespace TechieBlog.Areas.Admin.Controllers
 {
@@ -7,7 +8,8 @@ namespace TechieBlog.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Home()
         {
-            return View();
+            var objDataSvc = new AdminHomeSvc();
+            return View(objDataSvc.GetAdminCounts());
         }
     }
 }

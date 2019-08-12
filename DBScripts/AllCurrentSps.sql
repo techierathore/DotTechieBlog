@@ -139,13 +139,29 @@ CREATE PROCEDURE `BlogCommentInsert` (
     pGivenOn datetime,
 	pGivenBy varchar(350),
     pEmail varchar(350),
-	pCommenterSite varchar(350),
     pComment varchar(850), 
 	pPublish BOOLEAN
 )
 BEGIN
 INSERT INTO BlogComment
-(`PostID`,`GivenOn`,`GivenBy`,`Email`,`CommenterSite`,`Comment`,`Publish`)
+(`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`)
 VALUES
-(pPostID,pGivenOn,pGivenBy,pEmail,pCommenterSite,pComment,pPublish);
+(pPostID,pGivenOn,pGivenBy,pEmail,pComment,pPublish);
+END
+
+CREATE PROCEDURE `GetPostComments` (BlogPostID bigint)
+BEGIN
+SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`
+FROM BlogComment Where `Published` = 1 AND `PostID` = BlogPostID;
+END
+
+CREATE PROCEDURE `GetAdminCounts`()
+BEGIN
+SELECT  (Select count(*) From TechieBlog.Post WHERE TechieBlog.Post.Published =1 ) as `BlogCount`, 
+		(Select count(*) From TechieBlog.BlogComment) as `CommentCount`,
+        (Select count(*) From TechieBlog.Tag) as `TagCount`,
+		(Select count(*) From TechieBlog.BlogUser) as `UserCount`,
+        (Select count(*) From TechieBlog.BlogComment WHERE TechieBlog.BlogComment.Published =0 ) as `UnAppComments`           
+FROM TechieBlog.Post OutErr Where OutErr.Published =1
+Order By OutErr.PostID DESC LIMIT 1 ;
 END

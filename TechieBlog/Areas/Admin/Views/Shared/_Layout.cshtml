@@ -80,11 +80,7 @@
                             </a>
                         </li>
                         <!-- Comment button with number of latest comments count -->
-                        <li>
-                            <a class="dropdown-toggle" href="#">
-                                <i class="fa fa-comments"></i> Comments <span class="badge badge-info">6</span>
-                            </a>
-                        </li>
+                        <li>&nbsp;</li>
                     </ul>
                 </nav>
             </div>
@@ -111,12 +107,12 @@
                                 <span class="pull-right"><i class="fa fa-angle-right"></i></span>
                             </a>
                             <ul>
-                                <li><a href="widgets1.html">Need Approval</a></li>
-                                <li><a href="widgets2.html">Comments</a></li>
+                                <li><a href="@Url.Action("UnApprovedList", "Comments")">Need Approval</a></li>
+                                <li><a href="@Url.Action("AllCommentsList", "Comments")">Comments</a></li>
                             </ul>
                         </li>
-                        <li class="ngreen"><a href="charts.html"><i class="fa fa-users"></i> Users</a></li>
-                        <li class="norange"><a href="ui.html"><i class="fa fa-image"></i> Images</a></li>
+                        <li class="ngreen"><a href="@Url.Action("UsersList", "TagsNUsers")"><i class="fa fa-users"></i> Users</a></li>
+                        <li class="norange"><a href="@Url.Action("ImageList", "Image")"><i class="fa fa-image"></i> Images</a></li>
                         <li class="nred"><a href="forms.html"><i class="fa fa-th"></i> Widgets</a></li>
                         <li class="nlightblue"><a href="tables.html"><i class="fa fa-bar-chart-o"></i> Reports</a></li>
                         <li class="has_submenu nviolet">

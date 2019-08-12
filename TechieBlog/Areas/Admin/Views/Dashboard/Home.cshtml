@@ -1,4 +1,5 @@
-﻿
+﻿@using BlogEngine.Models
+@model AdminCounts
 @{
     ViewBag.Title = "Admin Home";
 }
@@ -28,34 +29,34 @@
                         <li class="bred">
                             <div class="pull-left"> <i class="fa fa-comment-o fa-5x"></i></div>
                             <!-- Text -->
-                            <div class="datas-text pull-right"><span class="bold">12</span> Posts!</div>
+                            <div class="datas-text pull-right"><span class="bold">@Model.BlogCount</span> Posts!</div>
                             <div class="clearfix"></div>
                         </li>
                         <li class="blightblue">
                             <!-- Graph -->
                             <div class="pull-left"><i class="fa fa-comments-o fa-5x"></i></div>
                             <!-- Text -->
-                            <div class="datas-text pull-right"><span class="bold">5</span> New Comments!</div>
+                            <div class="datas-text pull-right"><span class="bold">@Model.CommentCount</span> Comments!</div>
                             <div class="clearfix"></div>
                         </li>
                         <li class="bred">
                             <div class="pull-left"> <i class="fa fa-comments-o fa-5x"></i><i class="fa fa-check fa-5x"></i></div>
                             <!-- Text -->
-                            <div class="datas-text pull-right"><span class="bold">2</span> Need to Approve it!</div>
+                            <div class="datas-text pull-right"><span class="bold">@Model.UnAppComments</span> Need to Approve it!</div>
                             <div class="clearfix"></div>
                         </li>
                         <li class="bgreen">
                             <!-- Graph -->
                             <div class="pull-left"><i class="fa fa-group"></i></div>
                             <!-- Text -->
-                            <div class="datas-text pull-right"><span class="bold">30</span> New Users</div>
+                            <div class="datas-text pull-right"><span class="bold">@Model.UserCount</span> New Users</div>
                             <div class="clearfix"></div>
                         </li>
                         <li class="bviolet">
                             <!-- Graph -->
                             <div class="pull-left"><i class="fa fa-list fa-5x"></i></div>
                             <!-- Text -->
-                            <div class="datas-text pull-right"><span class="bold">2,000</span> Category!</div>
+                            <div class="datas-text pull-right"><span class="bold">@Model.TagCount</span> Category!</div>
 
                             <div class="clearfix"></div>
                         </li>

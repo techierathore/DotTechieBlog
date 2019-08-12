@@ -1,0 +1,42 @@
+﻿@using CaptchaMvc.HtmlHelpers
+<div class="modal-dialog login">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Login with</h4>
+        </div>
+        <div class="modal-body">
+            <div class="box">
+                <div class="form loginBox">
+                    @using (Html.BeginForm("Login", "Account", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="myform">
+                            <div class="form-group">
+                                <label class="control-label" for="EmailID">Email</label>
+                                <div class="controls">
+                                    <input id="EmailID" name="EmailID" class="form-control" type="text" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="LoginPassword">password</label>
+                                <div class="controls">
+                                    <input id="LoginPassword" name="LoginPassword" class="form-control" type="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div id="captcha" class="captcha">
+                                @Html.Label("Captcha")
+                                @Html.Captcha("Refresh", "Enter the text you see above", 5, "<span class='text-danger'>Enter Captcha</span>", true)
+                            </div>
+                            <button type="submit" class="btn btn-block">Login</button>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="forgot login-footer"></div>
+        </div>
+    </div>
+</div>

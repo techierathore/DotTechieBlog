@@ -49,8 +49,8 @@ namespace BlogEngine.Models
 		/// <summary>
 		/// Gets or sets the Publish value.
 		/// </summary>
-		public bool Publish
-		{ get; set; }
+		public bool Published
+        { get; set; }
 
     }
 }

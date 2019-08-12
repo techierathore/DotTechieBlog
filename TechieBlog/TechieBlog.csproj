@@ -176,6 +176,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagePostsController.cs" />
@@ -285,6 +286,10 @@
     <Content Include="Content\Blog\css\fonts\icomoon.eot" />
     <Content Include="Content\Blog\css\fonts\icomoon.ttf" />
     <Content Include="Content\Blog\css\fonts\icomoon.woff" />
+    <Content Include="Areas\Admin\Views\Comments\UnApprovedList.cshtml" />
+    <Content Include="Areas\Admin\Views\TagsNUsers\UsersList.cshtml" />
+    <Content Include="Areas\Admin\Views\Comments\AllCommentsList.cshtml" />
+    <Content Include="Areas\Admin\Views\Image\ImageList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\clipboard.min.js" />
     <Content Include="Scripts\imagehideblock.js" />
@@ -418,6 +423,7 @@
     <Content Include="Views\Shared\RecentBlogs.cshtml" />
     <Content Include="Views\Shared\TagLinks.cshtml" />
     <Content Include="Views\Home\SaveComment.cshtml" />
+    <Content Include="Views\Shared\LoginModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,11 +3,11 @@ CREATE DATABASE `TechieBlog` /*!40100 DEFAULT CHARACTER SET latin1 */;
 CREATE TABLE `BlogComment` (
   `CommentID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PostID` bigint(20) NOT NULL,
-  `CreatedDateTime` datetime NOT NULL,
-  `CommenterName` varchar(550) NOT NULL,
-  `Email` varchar(550) NOT NULL,
-  `Comment` longtext NOT NULL,
-  `Publish` tinyint(1) NOT NULL,
+  `GivenOn` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `GivenBy` varchar(350) NOT NULL,
+  `Email` varchar(350) NOT NULL,
+  `Comment` varchar(850) NOT NULL,
+  `Published` tinyint(1) NOT NULL,
   PRIMARY KEY (`CommentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -32,7 +32,7 @@ CREATE TABLE `BlogUser` (
   `UpdatedTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `LastLogin` datetime DEFAULT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `Post` (
   `PostID` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -52,7 +52,7 @@ CREATE TABLE `Tag` (
   `TagID` bigint(20) NOT NULL AUTO_INCREMENT,
   `TagName` varchar(150) NOT NULL,
   PRIMARY KEY (`TagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `UserSettings` (
   `SettingsID` int(11) NOT NULL AUTO_INCREMENT,

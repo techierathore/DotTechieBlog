@@ -9,6 +9,10 @@ namespace TechieBlog.Areas.Admin.Controllers
 {
     public class ImageController : Controller
     {
+        public ActionResult ImageList()
+        {
+            return View();
+        }
         public ActionResult UploadImage()
         {
             return PartialView("UploadImage");

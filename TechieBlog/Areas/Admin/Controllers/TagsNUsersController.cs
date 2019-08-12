@@ -5,7 +5,11 @@ using System.Web.Mvc;
 namespace TechieBlog.Areas.Admin.Controllers
 {
     public class TagsNUsersController : Controller
-    {     
+    {
+        public ActionResult UsersList()
+        {
+            return View();
+        }
         public ActionResult ShowAllTags()
         {
             var objDataSvc = new BlogSvc();

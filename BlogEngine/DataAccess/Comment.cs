@@ -24,12 +24,13 @@ namespace BlogEngine.DataAccess
                 vParams.Add("@pGivenBy", aComment.GivenBy);
                 vParams.Add("@pEmail", aComment.Email);
                 vParams.Add("@pComment", aComment.Comment);
-                vParams.Add("@pPublish", aComment.Publish);
+                vParams.Add("@pPublish", aComment.Published);
                 int iResult = vConn.Execute("BlogCommentInsert", vParams, commandType: CommandType.StoredProcedure);
                 if (iResult == 1) blResult = true;
             }
             return blResult;
         }
+
 
         /// <summary>
         /// Selects all records from the Comments table.
@@ -41,6 +42,12 @@ namespace BlogEngine.DataAccess
                 return vConn.Query<BlogComment>("CommentsSelectAll", commandType: CommandType.StoredProcedure).ToList();
             }
         }
-
+        public AdminCounts GetAdminCounts()
+        {
+            using (var vConn = OpenConnection())
+            {
+                return vConn.Query<AdminCounts>("GetAdminCounts", commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ CREATE TABLE `BlogComment` (
   `Email` varchar(350) NOT NULL,
   `Comment` varchar(850) NOT NULL,
   `Published` tinyint(1) NOT NULL,
+  `ParentCommentID` bigint(20) NOT NULL
   PRIMARY KEY (`CommentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

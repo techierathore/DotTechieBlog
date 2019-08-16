@@ -189,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BlogImages\MyHeadShot.png" />
+    <Content Include="BlogImages\UseImage.png" />
     <Content Include="Content\Admin\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\Admin\css\bootstrap-switch.css" />
     <Content Include="Content\Admin\css\bootstrap.min.css" />
@@ -290,6 +291,7 @@
     <Content Include="Areas\Admin\Views\TagsNUsers\UsersList.cshtml" />
     <Content Include="Areas\Admin\Views\Comments\AllCommentsList.cshtml" />
     <Content Include="Areas\Admin\Views\Image\ImageList.cshtml" />
+    <Content Include="Areas\Admin\Views\Comments\ReplyComment.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\clipboard.min.js" />
     <Content Include="Scripts\imagehideblock.js" />

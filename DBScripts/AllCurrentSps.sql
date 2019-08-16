@@ -134,24 +134,21 @@ FROM TechieBlog.Post OutErr Where OutErr.Published =1
 Order By OutErr.PostID DESC LIMIT 1 ;
 END
 
-CREATE PROCEDURE `BlogCommentInsert` (
-	pPostID bigint,
-    pGivenOn datetime,
-	pGivenBy varchar(350),
-    pEmail varchar(350),
-    pComment varchar(850), 
-	pPublish BOOLEAN
+CREATE DEFINER=`ForRemote`@`%` PROCEDURE `BlogCommentInsert`(
+	pPostID bigint, pGivenOn datetime, pGivenBy varchar(350),
+    pEmail varchar(350), pComment varchar(850), pPublish BOOLEAN,
+    pParentID bigint
 )
 BEGIN
 INSERT INTO BlogComment
-(`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`)
+(`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`,`ParentCommentID`)
 VALUES
-(pPostID,pGivenOn,pGivenBy,pEmail,pComment,pPublish);
+(pPostID,pGivenOn,pGivenBy,pEmail,pComment,pPublish,pParentID);
 END
 
 CREATE PROCEDURE `BlogCommentSelect`(BlogCommentID bigint)
 BEGIN
-SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`
+SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`,`ParentCommentID`
 FROM BlogComment Where `CommentID` = BlogCommentID;
 END
 
@@ -160,10 +157,16 @@ BEGIN
 UPDATE BlogComment SET	`Published` = 1 WHERE `CommentID` = BlogCommentID;
 END
 
-CREATE PROCEDURE `GetPostComments` (BlogPostID bigint)
+CREATE PROCEDURE `GetPostParentComments`(BlogPostID bigint)
 BEGIN
-SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`
-FROM BlogComment Where `Published` = 1 AND `PostID` = BlogPostID;
+SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`,`ParentCommentID`
+FROM BlogComment Where `Published` = 1 AND `ParentCommentID` is null AND `PostID` = BlogPostID;
+END
+
+CREATE PROCEDURE `GetPostChildComments`(BlogPostID bigint)
+BEGIN
+SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`,`ParentCommentID`
+FROM BlogComment Where `Published` = 1 AND `ParentCommentID` is not null AND `PostID` = BlogPostID;
 END
 
 CREATE PROCEDURE `GetPagedUnAppComments`(aPageSize int, aOffset int)

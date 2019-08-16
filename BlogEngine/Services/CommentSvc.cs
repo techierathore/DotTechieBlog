@@ -12,7 +12,7 @@ namespace BlogEngine.Services
             var objDataAccess = new CommentDa();
             return objDataAccess.Insert(Comment);
         }
-        public BlogComment GetComment2Approve(long BlogCommentID)
+        public BlogComment GetComment(long BlogCommentID)
         {
             var objDataAccess = new CommentDa();
             return objDataAccess.Select(BlogCommentID);

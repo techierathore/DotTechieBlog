@@ -87,18 +87,34 @@
                 </div>
 
             }
-            <h3>@Model.BlogComments.Count() Comments</h3>
-            @foreach (var vItem in Model.BlogComments)
-            {
-                <div class="media">
+            <h3>Comments</h3>
+            <div class="media">
+                @foreach (var vItem in Model.BlogComments)
+                {
+                <a class="pull-left avatar" href="#">
+                    <img class="media-object img-circle" src="~/BlogImages/UseImage.png" width="40" height="40" alt="">                   
+                </a>
                     <div class="media-body">
                         <h4 class="media-heading"><a href="">@vItem.GivenBy</a><span>On @vItem.GivenOn.ToLongDateString()</span></h4>
                         <p>@vItem.Comment </p>
+
+                        @foreach (var vReply in vItem.Replies)
+                        {
+                    <div class="media">
+                        <a class="pull-left avatar" href="#">
+                            <img class="media-object img-circle" src="~/BlogImages/UseImage.png" width="40" height="40" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="">@vReply.GivenBy</a><span>On @vReply.GivenOn.ToLongDateString()</span></h4>
+                            <p>@vReply.Comment </p>
+                        </div>
                     </div>
-                </div>                
-            }
+                        }
+                    </div>
+                }
+            </div>
+            </div>
         </div>
-    </div>
 </div>
 
 

@@ -25,6 +25,7 @@ namespace BlogEngine.DataAccess
                 vParams.Add("@pEmail", aComment.Email);
                 vParams.Add("@pComment", aComment.Comment);
                 vParams.Add("@pPublish", aComment.Published);
+                vParams.Add("@pParentID", aComment.ParentCommentID);
                 int iResult = vConn.Execute("BlogCommentInsert", vParams, commandType: CommandType.StoredProcedure);
                 if (iResult == 1) blResult = true;
             }
@@ -76,11 +77,35 @@ namespace BlogEngine.DataAccess
         }
         public IEnumerable<BlogComment> GetPostComments(long BlogPostID)
         {
+            IEnumerable<BlogComment> vRetObject = GetPostParentComments(BlogPostID);
+            IEnumerable<BlogComment> vChildObject = GetPostChildComments(BlogPostID);
+            if (vRetObject == null) return null;
+            List<BlogComment> vRetChildObject = new List<BlogComment>();
+            foreach (var vItem in vRetObject)
+            {
+                var vReplies = (from c in vChildObject
+                                 where c.ParentCommentID == vItem.CommentID
+                                 select c).ToList();
+                vItem.Replies = vReplies;
+            }
+            return vRetObject;
+        }
+        public IEnumerable<BlogComment> GetPostParentComments(long BlogPostID)
+        {
             using (var vConn = OpenConnection())
             {
                 var vParams = new DynamicParameters();
                 vParams.Add("@BlogPostID", BlogPostID);
-                return vConn.Query<BlogComment>("GetPostComments", vParams, commandType: CommandType.StoredProcedure).ToList();
+                return vConn.Query<BlogComment>("GetPostParentComments", vParams, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+        public IEnumerable<BlogComment> GetPostChildComments(long BlogPostID)
+        {
+            using (var vConn = OpenConnection())
+            {
+                var vParams = new DynamicParameters();
+                vParams.Add("@BlogPostID", BlogPostID);
+                return vConn.Query<BlogComment>("GetPostChildComments", vParams, commandType: CommandType.StoredProcedure).ToList();
             }
         }
         public AdminCounts GetAdminCounts()

@@ -20,21 +20,29 @@
                                 <table class="table table-bordered ">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Comment</th>
                                             <th>Given By</th>
                                             <th>Given On</th>
                                             <th>Approved</th>
+                                            <th>Reply</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var vItem in Model.BlogComments)
                                         {
-                                            <tr>
-                                                <td>@vItem.Comment</td>
-                                                <td>@vItem.GivenBy</td>
-                                                <td>@vItem.GivenOn.ToLongDateString()</td>
-                                                <td>@vItem.Published</td>
-                                            </tr>
+                                        <tr>
+                                            <td>@vItem.CommentID</td>
+                                            <td>@vItem.Comment</td>
+                                            <td>@vItem.GivenBy</td>
+                                            <td>@vItem.GivenOn.ToLongDateString()</td>
+                                            <td>@vItem.Published</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-warning" href="@Url.Action("ReplyComment", "Comments", new { BlogCommentID = vItem.CommentID })">
+                                                    <i class="fa fa-comment"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>

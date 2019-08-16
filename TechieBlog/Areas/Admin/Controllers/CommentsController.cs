@@ -1,10 +1,36 @@
-﻿using BlogEngine.Services;
+﻿using BlogEngine.Models;
+using BlogEngine.Services;
 using System.Web.Mvc;
 
 namespace TechieBlog.Areas.Admin.Controllers
 {
     public class CommentsController : Controller
     {
+        public ActionResult ReplyComment(long BlogCommentID) {
+            var objDataSvc = new CommentSvc();
+            var vSelComment = objDataSvc.GetComment(BlogCommentID);
+            return View(vSelComment);
+        }
+        [HttpPost]
+        public ActionResult ReplyComment(BlogComment ReplyComment)
+        {
+            var vCurrUser = (BlogUser)Session[Constants.LoggedUser];
+            var objDataSvc = new CommentSvc();
+            var vReply = new BlogComment() {
+                PostID = ReplyComment.PostID,
+                ParentCommentID = ReplyComment.CommentID,
+                Comment = ReplyComment.Comment,
+                Published = true,
+                GivenBy = vCurrUser.FirstName,
+                Email = vCurrUser.EmailID
+            };
+            if (objDataSvc.SaveComment(vReply))
+            {
+                var vAllPosts = objDataSvc.GetAllComments(1);
+                return View("AllCommentsList", vAllPosts);
+            }
+            return View();
+        }
         public ActionResult AllCommentsList(int? PageNo)
         {
             var objDataSvc = new CommentSvc();

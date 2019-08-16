@@ -1,8 +1,9 @@
 ﻿@using BlogEngine.Models
-@model Tag
+@model BlogComment
 @{
-    ViewBag.Title = "Tag";
+    ViewBag.Title = "Reply Comment";
 }
+
 
 <!-- Main bar -->
 <div class="mainbar">
@@ -13,27 +14,28 @@
             <div class="col-lg-12">
                 <div class="widget wblue">
                     <div class="widget-head">
-                        <div class="pull-left">Manage Tag</div>
+                        <div class="pull-left">Reply Comment</div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="widget-content">
                         <div class="padd">
-                            @using (Html.BeginForm("NewTag", "TagsNUsers", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            @using (Html.BeginForm("ReplyComment", "Comments", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                             {
                                 @Html.AntiForgeryToken()
-                                @Html.HiddenFor(model => model.TagID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.PostID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.CommentID, new { htmlAttributes = new { @class = "form-control" } })
                                 <!-- Form starts.  -->
-                                <div class="form-horizontal">                                    
+                                <div class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label" for="TagName">Tag Name </label>
+                                        <label class="col-md-2 control-label" for="Comment">Reply Comment </label>
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.TagName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter New Tag" } })
+                                            @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter New Tag" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
-                                            <button class="btn btn-info"><i class="fa fa-save"></i> Save Tag</button>                                            
-                                            <a class="btn btn-danger" href="@Url.Action("ShowAllTags", "TagsNUsers", new { Area = "Admin" })">Close</a>
+                                            <button class="btn btn-info"><i class="fa fa-save"></i> Save Reply</button>
+                                            <a class="btn btn-danger" href="@Url.Action("AllCommentsList", "Comments", new { Area = "Admin" })">Close</a>
                                         </div>
                                     </div>
                                 </div>
@@ -44,5 +46,5 @@
             </div>
         </div>
     </div><!--/ Matter ends -->
-</div> 
+</div>
 <!--/ Mainbar ends -->

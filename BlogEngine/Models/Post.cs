@@ -16,7 +16,8 @@ namespace BlogEngine.Models
         /// </summary>
         public string Title
 		{ get; set; }
-
+        public string UIPageTitle
+        { get; set; }
         public string Abstract
         { get; set; }
 

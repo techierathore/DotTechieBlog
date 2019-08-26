@@ -1,0 +1,55 @@
+﻿@using BlogEngine.Models
+@model BlogComment
+@{
+    ViewBag.Title = "Reply Comment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="small-header transition animated fadeIn">
+    <div class="hpanel">
+        <div class="panel-body">
+            <div id="hbreadcrumb" class="pull-right">
+                <ol class="hbreadcrumb breadcrumb">
+                    <li><a href="@Url.Action("AdminHome", "AdminDashboard")">Dashboard</a></li>
+                    <li>
+                        <a href="@Url.Action("AllCommentsList", "Comments")">All Comments</a>
+                    </li>
+                    <li class="active">
+                        <span>Reply Comment</span>
+                    </li>
+                </ol>
+            </div>
+            <h2 class="font-light m-b-xs">
+                Reply Comment
+            </h2>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="hpanel">
+        <div class="panel-body">
+            @using (Html.BeginForm("ReplyComment", "Comments", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.PostID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.CommentID, new { htmlAttributes = new { @class = "form-control" } })
+                <!-- Form starts.  -->
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="Comment">Reply Comment </label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter New Tag" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button class="btn btn-info"><i class="fa fa-save"></i> Save Reply</button>
+                            <a class="btn btn-danger" href="@Url.Action("AllCommentsList", "Comments", new { Area = "Admin" })">Close</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

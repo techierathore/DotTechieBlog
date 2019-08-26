@@ -8,7 +8,7 @@
         <div class="modal-body">
             <div class="box">
                 <div class="form loginBox">
-                    @using (Html.BeginForm("Login", "Account", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
                     <div class="myform">

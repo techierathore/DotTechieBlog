@@ -13,6 +13,7 @@ namespace BlogEngine.Models
 		/// </summary>
 		public string TagName
 		{ get; set; }
-
-	}
+        public string UIPageTitle
+        { get; set; }
+    }
 }

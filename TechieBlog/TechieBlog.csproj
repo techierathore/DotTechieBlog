@@ -189,6 +189,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BlogImages\FullLogo.png" />
     <Content Include="BlogImages\MyHeadShot.png" />
     <Content Include="BlogImages\UseImage.png" />
     <Content Include="Content\Admin\img\green%402x.png" />

@@ -4,12 +4,12 @@
     ViewBag.Title = "Home Page";
 }
 <section id="hero" class="light-typo">
-    <div id="cover-image" class="image-bg animated fadeIn"></div>
+    <div id="cover-image" class="image-bg animated fadeIn">
+        @*<img src="~/BlogImages/UseImage.png" />*@
+    </div>
     <div class="container welcome-content">
         <div class="middle-text">
-            <h1>TechieRathore</h1>
-            <h2><b>Key Lime</b> is a blog theme built with Bootstrap <br>by <b>Angelo Studio</b></h2>
-            <a class="btn smooth-scroll" href="#start">Get Stated</a>
+            <img class="btn-blog outline-white" src="~/BlogImages/FullLogo.png" />
         </div>
     </div>
 </section>
@@ -22,7 +22,7 @@
                     <div class="post-date">
                         <a href="">@vItem.CreatedOn.ToLongDateString() </a> <span>@vItem.CommentCount Comments</span>
                     </div>
-                    <h2><a href="post-typography.html">@vItem.Title</a></h2>
+                    <h2><a href="@Url.Action("DetailBlog", "Home", new { aPostID = vItem.PostID })">@vItem.Title</a></h2>
                     <p>
                         @vItem.Abstract <a class="" href="@Url.Action("DetailBlog", "Home", new { aPostID = vItem.PostID })">Read more</a>
                     </p>

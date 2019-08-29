@@ -160,7 +160,7 @@ END
 CREATE PROCEDURE `GetPostParentComments`(BlogPostID bigint)
 BEGIN
 SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`,`ParentCommentID`
-FROM BlogComment Where `Published` = 1 AND `ParentCommentID` is null AND `PostID` = BlogPostID;
+FROM BlogComment Where `Published` = 1 AND (`ParentCommentID` is null OR `ParentCommentID` = 0)  AND `PostID` = BlogPostID;
 END
 
 CREATE PROCEDURE `GetPostChildComments`(BlogPostID bigint)

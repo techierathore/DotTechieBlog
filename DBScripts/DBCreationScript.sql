@@ -1,14 +1,14 @@
-CREATE DATABASE `TechieBlog` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE  `TechieBlog` ;
 
 CREATE TABLE `BlogComment` (
   `CommentID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PostID` bigint(20) NOT NULL,
-  `GivenOn` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `GivenOn` datetime NOT NULL,
   `GivenBy` varchar(350) NOT NULL,
   `Email` varchar(350) NOT NULL,
   `Comment` varchar(850) NOT NULL,
   `Published` tinyint(1) NOT NULL,
-  `ParentCommentID` bigint(20) NOT NULL
+  `ParentCommentID` bigint(20) NOT NULL,
   PRIMARY KEY (`CommentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -29,8 +29,8 @@ CREATE TABLE `BlogUser` (
   `EmailID` varchar(550) NOT NULL,
   `LoginPassword` varchar(20) NOT NULL,
   `Role` varchar(25) NOT NULL,
-  `CreatedTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `UpdatedTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedTime` datetime,
+  `UpdatedTime` datetime,
   `LastLogin` datetime DEFAULT NULL,
   PRIMARY KEY (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -40,8 +40,8 @@ CREATE TABLE `Post` (
   `Title` varchar(550) NOT NULL,
   `Abstract` varchar(550) DEFAULT NULL,
   `PostContent` longtext NOT NULL,
-  `CreatedOn` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `UpdatedOn` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedOn` datetime,
+  `UpdatedOn` datetime,
   `UserID` bigint(20) NOT NULL,
   `Tags` varchar(550) NOT NULL,
   `FeaturedImage` varchar(550) NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE `Widgets` (
   `WidgetID` int(11) NOT NULL AUTO_INCREMENT,
   `WidgetName` varchar(150) NOT NULL,
   `WidgetContent` varchar(550) NOT NULL,
-  `UpdatedTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedTime` datetime,
   `UserID` bigint(20) NOT NULL,
   PRIMARY KEY (`WidgetID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

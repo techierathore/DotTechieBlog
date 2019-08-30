@@ -55,5 +55,17 @@ namespace TechieBlog.Controllers
 
             return View();
         }
+        public ActionResult Podcast()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Speaking()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }

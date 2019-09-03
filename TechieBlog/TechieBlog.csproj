@@ -200,11 +200,15 @@
     <Content Include="Content\Blog\css\icons.css" />
     <Content Include="Content\Blog\css\style.css" />
     <Content Include="Content\Blog\css\superslides.css" />
+    <Content Include="Content\Blog\img\Aboutbg.jpg" />
+    <Content Include="Content\Blog\img\HomeBg.jpg" />
     <Content Include="Content\Blog\img\ico\120.png" />
     <Content Include="Content\Blog\img\ico\152.png" />
     <Content Include="Content\Blog\img\ico\32.png" />
     <Content Include="Content\Blog\img\ico\60.png" />
     <Content Include="Content\Blog\img\ico\72.png" />
+    <Content Include="Content\Blog\img\Podcastbg.jpg" />
+    <Content Include="Content\Blog\img\SpeakingBg.jpg" />
     <Content Include="Content\Blog\js\bootstrap.min.js" />
     <Content Include="Content\Blog\js\custom.js" />
     <Content Include="Content\Blog\js\jquery-1.9.1.min.js" />

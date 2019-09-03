@@ -152,20 +152,17 @@ pre {
 	background: rgba(0, 0, 0, 0.4);
 }
 
-.image-bg {
-	background-image: url('../img/img5.jpg');
+.image-homebg {
+	background-image: url('../img/HomeBg.jpg');
 }
-.image-bg2 {
-	background-image: url('../img/img1.jpg');
+.image-aboutbg {
+    background-image: url('../img/AboutBg.jpg');
 }
-.image-bg3 {
-	 background-image: url('../img/img4.jpg'); 
+.image-podcastbg {
+    background-image: url('../img/PodcastBg.jpg');
 }
-.image-bg4 {
-	background-image: url('../img/img7.jpg');  
-}
-.image-bg5 {
-	background-image: url('../img/img3.jpg');  
+.image-speakingbg {
+    background-image: url('../img/SpeakingBg.jpg');
 }
 
 /* ------------------------ animations ------------------------ */

@@ -10,6 +10,7 @@ namespace TechieBlog.Controllers
         {
             var objDataSvc = new BlogHomeSvc();
             var vAllPosts = objDataSvc.GetAllBlogs(PageNo);
+            if (vAllPosts == null) return View();
             return View(vAllPosts);
         }
         public ActionResult DetailBlog(long aPostID)
@@ -45,26 +46,18 @@ namespace TechieBlog.Controllers
         }
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
         public ActionResult Podcast()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
         public ActionResult Speaking()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

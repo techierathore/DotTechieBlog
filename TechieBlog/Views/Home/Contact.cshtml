@@ -1,17 +1,64 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "H.O.P.E";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<section id="hero" class="light-typo">
+    <div id="cover-image" class="image-speakingbg animated fadeIn"></div>
+    <div class="container welcome-content">
+        <div class="middle-text">
+            <img class="btn-blog outline-white" src="~/BlogImages/FullLogo.png" />
+            <h1>H.O.P.E (Help One Person Everyday)</h1>
+        </div>
+    </div>
+</section>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<section id="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="active">H.O.P.E</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="contact container content">
+    <header class="section-header">
+        <h1>Appointment Form</h1>
+        <p>The world will be a much happier place if everyone did their part in helping one person every day. This idea I got from <a class="" href="https://ppx.inkwellpress.com/episode/chris-winfield-on-leading-with-h-o-p-e/" target="_blank">this episode of productivity paradox podcast</a>. So assuming that you know my expertise (see <a class="" href="@Url.Action("About", "Home")">About Me</a> if you don't know), Share your problem related to my area of expertise and I will give you 1 Hr free of charge consultation </p>
+    </header>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 contact-info cta-message wow fadeInLeft">
+            <form action="contact.html" class="myform" method="post" novalidate id="mycomment">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Name</label>
+                            <div class="controls">
+                                <input name="contactName" placeholder="Your name" class="form-control input-lg requiredField" type="text" data-error-empty="Enter name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="contact-mail">Email</label>
+                            <div class=" controls">
+                                <input name="email" placeholder="Your email" class="form-control input-lg requiredField" type="email" data-error-invalid="Invalid email address" data-error-empty="Enter email">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="contact-message">Message</label>
+                    <div class="controls">
+                        <textarea name="comments" placeholder="Your message" class="form-control input-lg requiredField" rows="5" data-error-empty="Enter message"></textarea>
+                    </div>
+                </div>
+                <p><button name="submit" type="submit" class="btn btn-store btn-block" data-error-message="Error!" data-sending-message="Sending..." data-ok-message="Email Sent">Send Message</button></p>
+                <input type="hidden" name="submitted" id="submitted3" value="true">
+            </form>
+        </div>     
+    </div>
+</div>

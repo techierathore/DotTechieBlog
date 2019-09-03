@@ -36,14 +36,9 @@ CREATE PROCEDURE `GetUserByEmail`(IN `LoginMail` VARCHAR(550))
 SELECT `UserID`,`FirstName`,`LastName`,`EmailID`,`LoginPassword`,`Role`,`CreatedTime`,`UpdatedTime`,`LastLogin`
 FROM BlogUser WHERE EmailID = LoginMail
 
-CREATE PROCEDURE `PostInsert`(
-	IN `Title` VARCHAR(550),
-    IN `Abstract` VARCHAR(550), 
-    IN `PostContent` LONGTEXT, 
-    IN `UserID` BIGINT, 
-    IN `Tags` VARCHAR(550), 
-    IN `FeaturedImage` VARCHAR(550), 
-    IN `Published` BOOLEAN)
+CREATE PROCEDURE `PostInsert`(IN `Title` VARCHAR(550),IN `Abstract` VARCHAR(550), 
+    IN `PostContent` LONGTEXT, IN `UserID` BIGINT, IN `Tags` VARCHAR(550), 
+    IN `FeaturedImage` VARCHAR(550), IN `Published` BOOLEAN)
     MODIFIES SQL DATA
 INSERT INTO Post
 (
@@ -54,11 +49,25 @@ VALUES
 	Title,Abstract, PostContent,UserID,Tags,FeaturedImage,Published
 )
 
-CREATE PROCEDURE `PostsByUserID`(BlogUserID bigint)
+CREATE PROCEDURE `PostUpdate`(
+    BlogPostID bigint, Title VARCHAR(550), Abstract VARCHAR(550),
+    PostContent LONGTEXT, UserID bigint, Tags VARCHAR(550),
+    FeaturedImage VARCHAR(550),UpdatedOn datetime, Published BOOLEAN
+)
 BEGIN
-SELECT `PostID`,`Title`,`Abstract`,`PostContent`,`CreatedOn`,`UpdatedOn`,
-	`UserID`,`Tags`,`FeaturedImage`,`Published`
-FROM Post WHERE `UserID` = BlogUserID;
+UPDATE Post
+SET `Title` = Title, `Abstract` = Abstract, `PostContent` = PostContent,
+	`UserID` = UserID, `Tags` = Tags, `FeaturedImage` = FeaturedImage,
+    `UpdatedOn` = UpdatedOn, `Published` = Published
+WHERE `PostID` = BlogPostID;
+END
+
+CREATE PROCEDURE `SelectAllPosts`()
+BEGIN
+
+SELECT `PostID`,`Title`,`Abstract`,`PostContent`,`CreatedOn`,`UpdatedOn`,`Published`,
+	`Post`.`UserID`,`Tags`,`FeaturedImage` , `BlogUser`.`FirstName` as `BlogWriter`
+FROM TechieBlog.Post inner join TechieBlog.BlogUser where `Post`.`UserID` = `BlogUser`.`UserID`;
 END
 
 CREATE PROCEDURE `PostSelect`(BlogPostID bigint)
@@ -69,34 +78,11 @@ SELECT `PostID`,`Title`,`Abstract`,`PostContent`,`CreatedOn`,`UpdatedOn`,
 FROM Post WHERE `PostID` = BlogPostID;
 END
 
-CREATE PROCEDURE `PostUpdate`(
-    BlogPostID bigint,
-	Title VARCHAR(550),
-	Abstract VARCHAR(550),
-	PostContent LONGTEXT,
-	UserID bigint,
-	Tags VARCHAR(550),
-	FeaturedImage VARCHAR(550), 
-    Published BOOLEAN
-)
+CREATE PROCEDURE `PostsByUserID`(BlogUserID bigint)
 BEGIN
-UPDATE Post
-SET `Title` = Title,
-    `Abstract` = Abstract,
-	`PostContent` = PostContent,
-	`UserID` = UserID,
-	`Tags` = Tags,
-	`FeaturedImage` = FeaturedImage,
-	`Published` = Published
-WHERE `PostID` = BlogPostID;
-END
-
-CREATE PROCEDURE `SelectAllPosts`()
-BEGIN
-
-SELECT `PostID`,`Title`,`Abstract`,`PostContent`,`CreatedOn`,`UpdatedOn`,`Published`,
-	`Post`.`UserID`,`Tags`,`FeaturedImage` , `BlogUser`.`FirstName` as `BlogWriter`
-FROM TechieBlog.Post inner join TechieBlog.BlogUser where `Post`.`UserID` = `BlogUser`.`UserID`;
+SELECT `PostID`,`Title`,`Abstract`,`PostContent`,`CreatedOn`,`UpdatedOn`,
+	`UserID`,`Tags`,`FeaturedImage`,`Published`
+FROM Post WHERE `UserID` = BlogUserID;
 END
 
 CREATE PROCEDURE `TagInsert`(pTagName nvarchar(150))

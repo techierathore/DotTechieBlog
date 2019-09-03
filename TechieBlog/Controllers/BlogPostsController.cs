@@ -1,5 +1,6 @@
 ﻿using BlogEngine.Models;
 using BlogEngine.Services;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -36,7 +37,8 @@ namespace TechieBlog.Controllers
         }
         public ActionResult NewPost()
         {
-            Post newPost = new Post() { PostID = 0 , UIPageTitle = "New Post"};
+            var objDataSvc = new BlogSvc();
+            Post newPost = new Post() {PostID=0, UIPageTitle = "New Post"};
             return View(newPost);
         }
         [HttpPost]
@@ -45,6 +47,7 @@ namespace TechieBlog.Controllers
             var objDataSvc = new BlogSvc();
             var vCurrUser = (BlogUser)Session[Constants.LoggedUser];
             aNewPost.UserID = vCurrUser.UserID;
+            if (string.IsNullOrEmpty(aNewPost.FeaturedImage)) aNewPost.FeaturedImage = " ";
             bool bResult;
             if (aNewPost.PostID == 0)
             {

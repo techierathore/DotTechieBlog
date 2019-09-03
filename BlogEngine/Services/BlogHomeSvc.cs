@@ -11,7 +11,9 @@ namespace BlogEngine.Services
         public BlogList GetAllBlogs(int? PageNo)
         {
             var objDataSvc = new PostDa();
-            var vPostCount = objDataSvc.GetTheCounts().BlogCount;
+            var vPostForCounts = objDataSvc.GetTheCounts();
+            if (vPostForCounts == null) return null;
+            var vPostCount = vPostForCounts.BlogCount;
             var vPager = new Pager(vPostCount, PageNo, _PageSize);
             var vOffSet = (vPager.CurrentPage - 1) * vPager.PageSize;
             var vGetNextBlogs = objDataSvc.GetPostsList(_PageSize, vOffSet);

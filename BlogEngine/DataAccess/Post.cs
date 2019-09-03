@@ -51,6 +51,7 @@ namespace BlogEngine.DataAccess
                 vParams.Add("@UserID", aPost.UserID);
                 vParams.Add("@Tags", aPost.Tags);
                 vParams.Add("@FeaturedImage", aPost.FeaturedImage);
+                vParams.Add("@UpdatedOn", aPost.UpdatedOn);
                 vParams.Add("@Published", aPost.Published);
                 int iResult = vConn.Execute("PostUpdate", vParams, commandType: CommandType.StoredProcedure);
                 if (iResult == 1) blResult = true;

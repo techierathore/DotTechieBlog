@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,7 +6,10 @@ using BlogEngine.Models;
 
 namespace BlogEngine.DataAccess
 {
-	 public class UserSettingDa : BaseDa
+    /// <summary>
+    /// TODO Rename the file 
+    /// </summary>
+    public class UserEventDa : BaseDa
     {
 
 		/// <summary>
@@ -15,92 +17,34 @@ namespace BlogEngine.DataAccess
 		/// returns True if value saved successfullyelse false
 		/// Throw exception with message value 'EXISTS' if the data is duplicate
 		/// </summary>
-		public bool Insert(UserSetting aUserSetting)
+		public bool Insert(UserEvent aUserSetting)
 		{
 			bool blResult = false;
-			if (ValidateValues(aUserSetting))
-			{
-				 throw new Exception("exists");
-			}
-			 using (var vConn = OpenConnection())
-				 {
-				 var vParams = new DynamicParameters();
-					 vParams.Add("@SettingsID",aUserSetting.SettingsID);
-					 vParams.Add("@HomeImage",aUserSetting.HomeImage);
-					 vParams.Add("@HomeImageText",aUserSetting.HomeImageText);
-					 vParams.Add("@NumberOfLastPost",aUserSetting.NumberOfLastPost);
-					 vParams.Add("@NumberOfCategory",aUserSetting.NumberOfCategory);
-					 vParams.Add("@PostNumberInPage",aUserSetting.PostNumberInPage);
-					 vParams.Add("@NumberOfTopPost",aUserSetting.NumberOfTopPost);
-					 vParams.Add("@UpdatedTime",aUserSetting.UpdatedTime);
-					 vParams.Add("@UserID",aUserSetting.UserID);
-					 int iResult = vConn.Execute("UserSettingsInsert", vParams, commandType: CommandType.StoredProcedure);
-			 if (iResult == -1) blResult = true;
-			 }
+            using (var vConn = OpenConnection())
+            {
+                var vParams = new DynamicParameters();
+                vParams.Add("@pLogoIconPath", aUserSetting.LogoIconPath);
+                vParams.Add("@pEventTitle", aUserSetting.EventTitle);
+                vParams.Add("@pSessionTitle", aUserSetting.SessionTitle);
+                vParams.Add("@pEventUrl", aUserSetting.EventUrl);
+                vParams.Add("@pEventDate", aUserSetting.EventDate);
+                vParams.Add("@pType", aUserSetting.Type);
+                vParams.Add("@BlogUserID", aUserSetting.UserID);
+                int iResult = vConn.Execute("UserEventInsert ", vParams, commandType: CommandType.StoredProcedure);
+                if (iResult == 1) blResult = true;
+            }
 			 return blResult;
-		}
-
-		/// <summary>
-		/// Updates record to the UserSettings table.
-		/// returns True if value saved successfullyelse false
-		/// Throw exception with message value 'EXISTS' if the data is duplicate
-		/// </summary>
-		public bool Update(UserSetting aUserSetting)
-		{
-			bool blResult = false;
-				if (ValidateValues(aUserSetting))
-				{
-					 throw new Exception("exists");
-				}
-			 using (var vConn = OpenConnection())
-				 {
-				 var vParams = new DynamicParameters();
-					 vParams.Add("@SettingsID",aUserSetting.SettingsID);
-					 vParams.Add("@HomeImage",aUserSetting.HomeImage);
-					 vParams.Add("@HomeImageText",aUserSetting.HomeImageText);
-					 vParams.Add("@NumberOfLastPost",aUserSetting.NumberOfLastPost);
-					 vParams.Add("@NumberOfCategory",aUserSetting.NumberOfCategory);
-					 vParams.Add("@PostNumberInPage",aUserSetting.PostNumberInPage);
-					 vParams.Add("@NumberOfTopPost",aUserSetting.NumberOfTopPost);
-					 vParams.Add("@UpdatedTime",aUserSetting.UpdatedTime);
-					 vParams.Add("@UserID",aUserSetting.UserID);
-					 int iResult = vConn.Execute("UserSettingsUpdate", vParams, commandType: CommandType.StoredProcedure);
-				 if (iResult == -1) blResult = true;
-				 }
-			return blResult;
-		}
-
-		/// <summary>
-		/// Validate the values passed to save the details of UserSettings class, that wether those values are already present or not.
-		/// </summary>
-		 protected bool ValidateValues(UserSetting aUserSetting)
-		{
-			 bool blResult = true;
-			 using (var vConn = OpenConnection())
-				 {
-				 var vParams = new DynamicParameters();
-					 vParams.Add("@SettingsID",aUserSetting.SettingsID);
-					 vParams.Add("@HomeImage",aUserSetting.HomeImage);
-					 vParams.Add("@HomeImageText",aUserSetting.HomeImageText);
-					 vParams.Add("@NumberOfLastPost",aUserSetting.NumberOfLastPost);
-					 vParams.Add("@NumberOfCategory",aUserSetting.NumberOfCategory);
-					 vParams.Add("@PostNumberInPage",aUserSetting.PostNumberInPage);
-					 vParams.Add("@NumberOfTopPost",aUserSetting.NumberOfTopPost);
-					 vParams.Add("@UpdatedTime",aUserSetting.UpdatedTime);
-					 vParams.Add("@UserID",aUserSetting.UserID);
-					 int iResult = vConn.Execute("UserSettingsValidate", vParams, commandType: CommandType.StoredProcedure);
-			 if (iResult >= 1) blResult = false;
-			}
-			return blResult;
 		}
 		/// <summary>
 		/// Selects all records from the UserSettings table.
 		/// </summary>
-		 public IEnumerable<UserSetting> SelectAll()
+		 public IEnumerable<UserEvent> GetUserEvents(long UserID)
 		{
 			 using (var vConn = OpenConnection())
 			{
-				 return vConn.Query<UserSetting>("UserSettingsSelectAll", commandType: CommandType.StoredProcedure).ToList();
+                var vParams = new DynamicParameters();
+                vParams.Add("@BlogUserID", UserID);
+                return vConn.Query<UserEvent>("GetUserEvents", vParams, commandType: CommandType.StoredProcedure).ToList();
 			}
 		}
 		}

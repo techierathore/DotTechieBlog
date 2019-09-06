@@ -1,4 +1,5 @@
-﻿
+﻿@using BlogEngine.Models
+@model IEnumerable<UserEvent>
 @{
     ViewBag.Title = "Speaking";
 }
@@ -27,8 +28,35 @@
 </section>
 
 <div class="container content">
-    <div class="row">
-
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            I started the <strong>NCR Xamarin & Cloud Techies</strong>  meet-up group in Jun 2016 to collaborate, learn & share my experainces with local developer community. Since then I have been lucky enough to connect to thousands of developers all around the world.
+            I love to collaborate with students, developers, business owners by sharing my passion for providing solutions to their technological problems using technologies like C#, Azure,.NET Core, Xamarin.Forms, Blazor etc. You may often find me presenting on developer topics such as Xamarin.Forms, C#,.NET, ASP.NET, DevOps and more.
+        </p>
+        <h4>The events where I have presented or going to present are as follows </h4>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Event</th>
+                    <th>Session</th>
+                    <th>Date</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vItem in Model)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@vItem.EventTitle</td>
+                        <td>@vItem.SessionTitle</td>
+                        <td>@vItem.EventDate.ToLongDateString()</td>
+                        <td><a href=@vItem.EventUrl target="_blank">Event Link To View/Register</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 

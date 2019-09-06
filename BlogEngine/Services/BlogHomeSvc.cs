@@ -51,5 +51,13 @@ namespace BlogEngine.Services
             };            
             return objReturn;
         }
+
+        public IEnumerable<UserEvent> GetUserEvents(long aBlogUserID)
+        {
+            var objDataSvc = new UserEventDa();
+            var vUserEvents = objDataSvc.GetUserEvents(aBlogUserID);
+            return vUserEvents;
+        }
+
     }
 }

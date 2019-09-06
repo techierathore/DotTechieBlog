@@ -58,7 +58,9 @@ namespace TechieBlog.Controllers
         }
         public ActionResult Speaking()
         {
-            return View();
+            var objDataSvc = new BlogHomeSvc();
+            var vUserEvents= objDataSvc.GetUserEvents(1);
+            return View(vUserEvents);
         }
     }
 }

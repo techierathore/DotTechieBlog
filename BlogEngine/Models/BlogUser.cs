@@ -4,7 +4,6 @@ namespace BlogEngine.Models
 {
     public class BlogUser
 	{
-
 		/// <summary>
 		/// Gets or sets the UserID value.
 		/// </summary>
@@ -58,7 +57,19 @@ namespace BlogEngine.Models
 		/// </summary>
 		public DateTime LastLogin
 		{ get; set; }
-
-
-	}
+        public string ProfileImagePath
+        { get; set; }
+        public string ProfileDescription
+        { get; set; }
+        public string TwiiterUrl
+        { get; set; }
+        public string LinkedInUrl
+        { get; set; }
+        public string GitHubUrl
+        { get; set; }
+        public string PodDescription
+        { get; set; }
+        public string SpeakDescription
+        { get; set; }
+    }
 }

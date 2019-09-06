@@ -2,55 +2,51 @@ using System;
 
 namespace BlogEngine.Models
 {
-    public class UserSetting
-	{
-		/// <summary>
-		/// Gets or sets the SettingsID value.
-		/// </summary>
-		public long SettingsID
-		{ get; set; }
+    /// <summary>
+    /// TODO Rename the file 
+    /// </summary>
+    public class UserEvent
+    {
+        /// <summary>
+        /// Gets or sets the EventsID value.
+        /// </summary>
+        public long EventsID
+        { get; set; }
 
-		/// <summary>
-		/// Gets or sets the HomeImage value.
-		/// </summary>
-		public string HomeImage
-		{ get; set; }
+        /// <summary>
+        /// Gets or sets the LogoIconPath value.
+        /// </summary>
+        public string LogoIconPath
+        { get; set; }
+        /// <summary>
+        /// Gets or sets the SessionTitle value.
+        /// </summary>
+        public string SessionTitle
+        { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the EventTitle value.
+        /// </summary>
+        public string EventTitle
+        { get; set; }
 
-		/// <summary>
-		/// Gets or sets the HomeImageText value.
-		/// </summary>
-		public string HomeImageText
-		{ get; set; }
+        /// <summary>
+        /// Gets or sets the EventUrl value.
+        /// </summary>
+        public string EventUrl
+        { get; set; }
 
-		/// <summary>
-		/// Gets or sets the NumberOfLastPost value.
-		/// </summary>
-		public byte NumberOfLastPost
-		{ get; set; }
+        /// <summary>
+        /// Gets or sets the Type  value.
+        /// </summary>
+        public string Type
+        { get; set; }
 
-		/// <summary>
-		/// Gets or sets the NumberOfCategory value.
-		/// </summary>
-		public byte NumberOfCategory
-		{ get; set; }
-
-		/// <summary>
-		/// Gets or sets the PostNumberInPage value.
-		/// </summary>
-		public byte PostNumberInPage
-		{ get; set; }
-
-		/// <summary>
-		/// Gets or sets the NumberOfTopPost value.
-		/// </summary>
-		public byte NumberOfTopPost
-		{ get; set; }
-
-		/// <summary>
-		/// Gets or sets the UpdatedTime value.
-		/// </summary>
-		public DateTime UpdatedTime
-		{ get; set; }
+        /// <summary>
+        /// Gets or sets the EventDate  value.
+        /// </summary>
+        public DateTime EventDate
+        { get; set; }
 
 		/// <summary>
 		/// Gets or sets the UserID value.

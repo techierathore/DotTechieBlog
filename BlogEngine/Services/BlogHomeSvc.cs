@@ -51,7 +51,11 @@ namespace BlogEngine.Services
             };            
             return objReturn;
         }
-
+        /// <summary>
+        /// This Method is to show the Events of the User
+        /// </summary>
+        /// <param name="aBlogUserID"></param>
+        /// <returns></returns>
         public IEnumerable<UserEvent> GetUserEvents(long aBlogUserID)
         {
             var objDataSvc = new UserEventDa();

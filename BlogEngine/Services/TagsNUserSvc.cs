@@ -21,5 +21,21 @@ namespace BlogEngine.Services
             var objDataAccess = new TagDa();
             return objDataAccess.Update(aTag);
         }
+
+        public UserEvent GetEventForEdit(long aEventID)
+        {
+            var objDataAccess = new UserEventDa();
+            return objDataAccess.Select(aEventID);
+        }
+        public bool SaveNewEvent(UserEvent aNew)
+        {
+            var objDataAccess = new UserEventDa();
+            return objDataAccess.Insert(aNew);
+        }
+        public bool UpdateEvent(UserEvent aNew)
+        {
+            var objDataAccess = new UserEventDa();
+            return objDataAccess.Update(aNew);
+        }
     }
 }

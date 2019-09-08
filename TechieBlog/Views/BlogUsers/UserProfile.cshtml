@@ -1,8 +1,119 @@
-﻿
+﻿@using BlogEngine.Models
+@model IEnumerable<UserEvent>
 @{
-    ViewBag.Title = "UserProfile";
+    ViewBag.Title = "User Profile";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-}
 
-<h2>UserProfile</h2>
+    BlogUser vCurrUser = null;
+    if (null != HttpContext.Current.Session[Constants.LoggedUser])
+    {
+        vCurrUser = (BlogUser)HttpContext.Current.Session[Constants.LoggedUser];
+    }
+}
+<div class="normalheader ">
+    <div class="hpanel">
+        <div class="panel-body">
+            <a class="small-header-action" href=""></a>
+            <div id="hbreadcrumb" class="pull-right m-t-lg"></div>
+            <h2 class="font-light m-b-xs">
+                @vCurrUser.FirstName's  Profile
+            </h2>
+            <small>Show user data in clear profile design</small>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="hpanel hgreen">
+                <div class="panel-body">
+                    <div class="pull-right text-right">
+                        <div class="btn-group">
+                            <i class="fa fa-facebook btn btn-default btn-xs"></i>
+                            <i class="fa fa-twitter btn btn-default btn-xs"></i>
+                            <i class="fa fa-linkedin btn btn-default btn-xs"></i>
+                        </div>
+                    </div>
+                    <img alt="logo" class="img-circle m-b m-t-md" src="~/Images/UseImage.png" width="100" height="100">
+                    <h3>@vCurrUser.FirstName @vCurrUser.LastName</h3>
+                    <div class="text-muted font-bold m-b-xs"></div>
+                </div>
+                <div class="panel-body">
+                    <dl>
+                        <dt>Description lists</dt>
+                        <dd>A description list is perfect for defining terms.</dd>
+                        <dt>Heading</dt>
+                        <dd>Content</dd>
+                        <dd>Content</dd>
+                    </dl>
+                </div>
+                <div class="panel-footer contact-footer">
+                    <div class="row">
+                        <div class="col-md-4 border-right">
+                            <div class="contact-stat"><span>Blogs: </span> <strong>NA</strong></div>
+                        </div>
+                        <div class="col-md-4 border-right">
+                            <div class="contact-stat"><span>Comments: </span> <strong>NA</strong></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-stat"><span>Views: </span> <strong>NA</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="hpanel">
+                <div class="hpanel">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tab-1">User Events</a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-2">Blank</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <a href="@Url.Action("AddEvent", "BlogUsers")" class="btn btn-success"><i class="fa fa-plus-square btn-success"></i></a>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Event</th>
+                                                <th>Session</th>
+                                                <th>Date</th>
+                                                <th>URL</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var vItem in Model)
+                                            {
+                                                <tr>
+                                                    <td></td>
+                                                    <td>@vItem.EventTitle</td>
+                                                    <td>@vItem.SessionTitle</td>
+                                                    <td>@vItem.EventDate.ToLongDateString()</td>
+                                                    <td><a href=@vItem.EventUrl target="_blank">Event Link To View/Register</a></td>
+                                                    <td><a class="btn btn-success" href="@Url.Action("EditEvent", "BlogUsers", new { aEventID = vItem.EventID })"><i class="fa fa-pencil-square"></i></a></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-2" class="tab-pane">
+                            <div class="panel-body no-padding">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 

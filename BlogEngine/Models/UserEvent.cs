@@ -10,7 +10,7 @@ namespace BlogEngine.Models
         /// <summary>
         /// Gets or sets the EventsID value.
         /// </summary>
-        public long EventsID
+        public long EventID
         { get; set; }
 
         /// <summary>
@@ -54,5 +54,7 @@ namespace BlogEngine.Models
 		public long UserID
 		{ get; set; }
 
-	}
+        public string UIPageTitle
+        { get; set; }
+    }
 }

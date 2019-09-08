@@ -612,7 +612,6 @@
     <Content Include="Views\Home\Podcast.cshtml" />
     <Content Include="Views\Home\Speaking.cshtml" />
     <Content Include="Views\BlogUsers\UserProfile.cshtml" />
-    <Content Include="Views\BlogUsers\UserEvents.cshtml" />
     <Content Include="Views\BlogUsers\AddEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>

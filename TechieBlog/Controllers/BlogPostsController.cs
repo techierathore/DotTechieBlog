@@ -37,7 +37,6 @@ namespace TechieBlog.Controllers
         }
         public ActionResult NewPost()
         {
-            var objDataSvc = new BlogSvc();
             Post newPost = new Post() {PostID=0, UIPageTitle = "New Post"};
             return View(newPost);
         }

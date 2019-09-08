@@ -8,5 +8,17 @@ namespace TechieBlog.Controllers
         {
             return View();
         }
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+        public ActionResult UserEvents()
+        {
+            return View();
+        }
+        public ActionResult AddEvent()
+        {
+            return View();
+        }
     }
 }

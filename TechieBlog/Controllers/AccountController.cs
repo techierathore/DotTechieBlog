@@ -1,6 +1,5 @@
 ﻿using BlogEngine.Models;
 using BlogEngine.Services;
-using CaptchaMvc.HtmlHelpers;
 using System;
 using System.Web.Mvc;
 
@@ -16,11 +15,6 @@ namespace TechieBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(BlogUser aLoginUser, string aReturnUrl)
         {
-            if (!this.IsCaptchaValid("Captcha is not valid"))
-            {
-                ViewBag.errormessage = "Error: captcha entered is not valid.";
-                return View(aLoginUser);
-            }
             if (!ModelState.IsValid) return View(aLoginUser);
             var objDataSvc = new AccountSvc();
             var selUser = objDataSvc.BlogLogin(aLoginUser);
@@ -50,11 +44,6 @@ namespace TechieBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SignUp(BlogUser aNewUser)
         {
-            if (!this.IsCaptchaValid("Captcha is not valid"))
-            {
-                ViewBag.errormessage = "Error: captcha entered is not valid.";
-                return View(aNewUser);
-            }
             if (!ModelState.IsValid) return View(aNewUser);
             try
             {

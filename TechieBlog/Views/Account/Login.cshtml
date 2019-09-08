@@ -1,9 +1,8 @@
-﻿@using CaptchaMvc.HtmlHelpers
+﻿
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_BlankAdminLayout.cshtml";
 }
-
 <div class="login-container">
     <div class="row">
         <div class="col-md-12">
@@ -27,10 +26,7 @@
                             <span class="help-block small">Your strong password</span>
                         </div>
                         <div class="form-group">
-                            <div id="captcha" class="captcha">
-                                @Html.Label("Captcha")
-                                @Html.Captcha("Refresh", "Enter the text you see above", 5, "<span class='text-danger'>Enter Captcha</span>", true)
-                            </div>
+
                         </div>
                         <button class="btn btn-success btn-block">Login</button>
                         <a class="btn btn-default btn-block" href="@Url.Action("SignUp", "Account")">Register</a>

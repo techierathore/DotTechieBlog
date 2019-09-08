@@ -50,9 +50,6 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
-      <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
-    </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.4\lib\netstandard2.0\Dapper.dll</HintPath>
     </Reference>
@@ -219,7 +216,14 @@
     <Content Include="Content\Blog\css\fonts\icomoon.eot" />
     <Content Include="Content\Blog\css\fonts\icomoon.ttf" />
     <Content Include="Content\Blog\css\fonts\icomoon.woff" />
+    <Content Include="Icons\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="Icons\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="Icons\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Icons\pe-icon-7-stroke\css\helper.css" />
+    <Content Include="Icons\pe-icon-7-stroke\css\pe-icon-7-stroke.css" />
+    <Content Include="Icons\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="Images\AzureSolutionsArchitect.png" />
     <Content Include="Images\FullLogo.png" />
     <Content Include="Images\loading-bars.svg" />
     <Content Include="Images\MyHeadShot.png" />
@@ -607,6 +611,9 @@
     <Content Include="Views\Comments\ReplyComment.cshtml" />
     <Content Include="Views\Home\Podcast.cshtml" />
     <Content Include="Views\Home\Speaking.cshtml" />
+    <Content Include="Views\BlogUsers\UserProfile.cshtml" />
+    <Content Include="Views\BlogUsers\UserEvents.cshtml" />
+    <Content Include="Views\BlogUsers\AddEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

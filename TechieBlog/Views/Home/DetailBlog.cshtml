@@ -4,7 +4,9 @@
     ViewBag.Title = "";
 }
 <section id="hero" class="light-typo">
-    <div id="cover-image" class="image-bg2 animated fadeIn"></div>
+    <div id="cover-image" class="animated fadeIn">
+        <img class="btn-blog outline-white" src="@Model.BlogPost.FeaturedImage" />
+    </div>
     <div class="container welcome-content">
         <div class="middle-text">
             <img class="btn-blog outline-white" src="~/BlogImages/FullLogo.png" />

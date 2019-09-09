@@ -6,11 +6,6 @@ namespace BlogEngine.Models
 {
     public class BlogComment
     {
-        public BlogComment()
-        {
-            GivenOn = DateTime.Now;
-        }
-
         /// <summary>
         /// Gets or sets the CommentID value.
         /// </summary>

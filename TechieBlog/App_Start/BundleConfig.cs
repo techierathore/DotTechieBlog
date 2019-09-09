@@ -50,6 +50,14 @@ namespace TechieBlog
             bundles.Add(new ScriptBundle("~/bundles/validation/js").Include(
                       "~/Vendor/jquery-validation/jquery.validate.min.js"));
 
+            // Datepicker
+            bundles.Add(new ScriptBundle("~/bundles/datepicker/js").Include(
+                      "~/Vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"));
+
+            // Datepicker style
+            bundles.Add(new StyleBundle("~/bundles/datepicker/css").Include(
+                      "~/Vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"));
+
             // Summernote
             bundles.Add(new ScriptBundle("~/bundles/summernote/js").Include(
                       "~/Vendor/summernote/summernote.min.js"));

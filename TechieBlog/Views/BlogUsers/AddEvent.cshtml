@@ -1,5 +1,4 @@
 ﻿@using BlogEngine.Models
-@using BlogEngine.Services
 @model UserEvent
 @{
     ViewBag.Title = Model.UIPageTitle;
@@ -36,7 +35,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Upload Event Logo Icon Image </label>
                     <div class="col-md-5">
-                        <input type="file" class="form-control" id="UploadBlogImg" />
+                        <input type="file" class="form-control" id="UploadEventLogo" />
                     </div>
                     <div class="col-md-5">
                         @Html.EditorFor(model => model.LogoIconPath, new { htmlAttributes = new { @class = "form-control", placeholder = "Event Logo Icon Image" } })
@@ -46,7 +45,7 @@
                     <label class="col-md-2 control-label">&nbsp;</label>
                     <div class="col-md-10">
                         <label class="control-label">Squeezed Image Preview</label>
-                        <img id="imgPreview" height="50" width="750" class="thumbnail" />
+                        <img id="imgPreview" height="50" width="450" class="thumbnail" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -62,9 +61,18 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-md-2 control-label" for="EventDate">Event Date </label>
+                    <div class="col-md-10">
+                        <div class="input-group date">
+                            @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Event Date" } })
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                        </div>               
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-md-2 control-label" for="EventUrl">Event Url</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.EventUrl, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Event Title" } })
+                        @Html.EditorFor(model => model.EventUrl, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Event Url" } })
                     </div>
                 </div>
                 <div class="form-group">
@@ -85,3 +93,45 @@
         </div>
     </div>
 </div>
+
+@section Styles {
+    @Styles.Render("~/bundles/datepicker/css")
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/datepicker/js")
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('#EventDate').datepicker();
+            $('.input-group.date').datepicker({});
+        });
+
+            $("#UploadEventLogo").change(function () {
+                 UploadEventImage();
+            });
+   function UploadEventImage() {
+        var url = '@Url.Action("UploadFile", "Images")';
+        formData = new FormData();
+        var files = $("#UploadEventLogo").get(0).files;
+        if (files.length > 0) {
+            formData.append("aUploadedFile", files[0]);
+                    }
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (FileUrl) {
+                $("#LogoIconPath").val(FileUrl);
+                $("#imgPreview").attr('src', FileUrl);
+            },
+            error: function (data) {
+                alert(data.responseText);
+            }
+        });
+    }
+    </script>
+}

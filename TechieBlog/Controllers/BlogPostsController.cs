@@ -37,7 +37,10 @@ namespace TechieBlog.Controllers
         }
         public ActionResult NewPost()
         {
-            Post newPost = new Post() {PostID=0, UIPageTitle = "New Post"};
+            Post newPost = new Post() {
+                PostID =0,
+                UIPageTitle = "New Post",
+                CreatedOn =DateTime.Today};
             return View(newPost);
         }
         [HttpPost]
@@ -52,7 +55,9 @@ namespace TechieBlog.Controllers
             {
                 bResult = objDataSvc.SaveNewBlog(aNewPost);
             }
-            else { bResult = objDataSvc.UpdateBlog(aNewPost); }
+            else {
+                aNewPost.UpdatedOn = DateTime.Today;
+                bResult = objDataSvc.UpdateBlog(aNewPost); }
             if (bResult) return RedirectToAction("ShowAllPosts", "BlogPosts");
 
             ModelState.AddModelError("", "Unable to Save Blog");

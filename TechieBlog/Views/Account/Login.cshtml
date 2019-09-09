@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_BlankAdminLayout.cshtml";
 }
@@ -26,9 +25,15 @@
                             <span class="help-block small">Your strong password</span>
                         </div>
                         <div class="form-group">
-
+                            <span>&nbsp;Verification Code</span>
+                            <input type="text" id="txtCaptcha" class="input" style="text-align:center; border:none; font-weight:bold; font-family:Modern" />
+                            <input type="button" id="btnrefresh" class="refresh" value="Refresh" onclick="DrawCaptcha();" />
                         </div>
-                        <button class="btn btn-success btn-block">Login</button>
+                        <div class="form-group">
+                                <span>&nbsp;Enter Verification Code</span>
+                                <span><input type="text" class="input" id="txtInput" /> </span>
+                        </div>
+                        <button id="btnLogin" class="btn btn-success btn-block" onclick="return ValidateCaptca()">Login</button>
                         <a class="btn btn-default btn-block" href="@Url.Action("SignUp", "Account")">Register</a>
                     }
                 </div>
@@ -46,3 +51,38 @@
     </div>
 </div>
 
+@section Scripts {
+
+    <script type="text/javascript">
+          window.onload = function () {
+              DrawCaptcha();
+          };
+          //Created / Generates the captcha function    
+          function DrawCaptcha() {
+              var a = Math.ceil(Math.random() * 10) + '';
+              var b = Math.ceil(Math.random() * 10) + '';
+              var c = Math.ceil(Math.random() * 10) + '';
+              var d = Math.ceil(Math.random() * 10) + '';
+              var e = Math.ceil(Math.random() * 10) + '';
+              var f = Math.ceil(Math.random() * 10) + '';
+              var g = Math.ceil(Math.random() * 10) + '';
+              var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' ' + f + ' ' + g;
+              document.getElementById("txtCaptcha").value = code
+          }
+
+          // Validate the Entered input aganist the generated security code function   
+          function ValidateCaptca() {
+              var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+              var str2 = removeSpaces(document.getElementById('txtInput').value);
+              if (str1 == str2) return true;
+              alert('Enter correct Verification code');
+              return false;
+
+          }
+
+          // Remove the spaces from the entered and generated code
+          function removeSpaces(string) {
+              return string.split(' ').join('');
+          }
+    </script>
+}

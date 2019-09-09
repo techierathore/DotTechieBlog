@@ -47,7 +47,14 @@
                 @foreach (var vItem in Model)
                 {
                     <tr>
-                        <td></td>
+                        <td>
+                            @if (string.IsNullOrWhiteSpace(@vItem.LogoIconPath))
+                            {
+                                <img class="btn-blog outline-white" src="~/Images/NoImage.png" width="50" height="50" />
+                            }
+                            else
+                            { <img class="btn-blog outline-white" src="@vItem.LogoIconPath" width="50" height="50" />}
+                        </td>
                         <td>@vItem.EventTitle</td>
                         <td>@vItem.SessionTitle</td>
                         <td>@vItem.EventDate.ToLongDateString()</td>

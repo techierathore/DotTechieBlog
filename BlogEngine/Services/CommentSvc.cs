@@ -1,6 +1,7 @@
 ﻿using BlogEngine.DataAccess;
 using BlogEngine.Models;
 using BlogEngine.ViewModels;
+using System;
 
 namespace BlogEngine.Services
 {
@@ -10,6 +11,7 @@ namespace BlogEngine.Services
         public bool SaveComment(BlogComment Comment)
         {
             var objDataAccess = new CommentDa();
+            Comment.GivenOn = DateTime.Today;
             return objDataAccess.Insert(Comment);
         }
         public BlogComment GetComment(long BlogCommentID)

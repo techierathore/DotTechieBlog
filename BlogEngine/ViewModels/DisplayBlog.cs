@@ -8,5 +8,7 @@ namespace BlogEngine.ViewModels
         public Post BlogPost { get; set; }
         public BlogComment NewComment { get; set; }
         public IEnumerable<BlogComment> BlogComments { get; set; }
+        public Post NextPost { get; set; }
+        public Post PrevPost { get; set; }
     }
 }

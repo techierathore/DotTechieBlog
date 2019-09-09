@@ -184,7 +184,6 @@ SELECT `BlogImageID`,`ImageName`,`ImagePath`,`Size`,`CreatedTime`,`UserID`
 FROM BlogImage Order By `BlogImageID` DESC LIMIT aPageSize OFFSET aOffset ;
 END
 
-'*************Next Deployment ***************'
 CREATE PROCEDURE `GetUserEvents`(BlogUserID bigint)
 BEGIN
 SELECT `EventID`,`LogoIconPath`,`EventTitle`,`SessionTitle`,

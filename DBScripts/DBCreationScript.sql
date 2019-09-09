@@ -77,18 +77,6 @@ CREATE TABLE `Widgets` (
   PRIMARY KEY (`WidgetID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-////////////////// Next Deployment ///////////////////
-
-CREATE TABLE TechieBlog.BlogSubs (
-BlogSubID BIGINT(20) NOT NULL AUTO_INCREMENT,
-FirstName VARCHAR(250) NOT NULL,
-EmailID VARCHAR(550) NOT NULL,
-SubMessage LONGTEXT NULL,
-SubscribedOn DATE NULL,
-ActiveSub TINYINT(1) NULL,
-UnSubscribedOn DATE NULL,
-PRIMARY KEY (BlogSubID));
-
 ALTER TABLE TechieBlog.UserSettings
 DROP COLUMN NumberOfTopPost,
 DROP COLUMN PostNumberInPage,

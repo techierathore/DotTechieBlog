@@ -36,4 +36,4 @@ VALUES
 INSERT INTO TechieBlog.UserEvents
 (LogoIconPath,EventTitle,SessionTitle,EventUrl,EventDate,Type,UserID)
 VALUES
-('','.NET Conf 2019 Noida','Updates From .NET Conference','https://www.meetup.com/XamTechies/events/264555829','2019-09-28','Event',1);
+('','.NET Conf 2019 Noida','Highlights of .NET Conference','https://www.meetup.com/XamTechies/events/264555829','2019-09-28','Event',1);

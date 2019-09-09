@@ -33,13 +33,13 @@ namespace TechieBlog.Controllers
             {
                 var vFileName = Path.GetFileNameWithoutExtension(aUploadedFile.FileName);
                 var vExtension = Path.GetExtension(aUploadedFile.FileName);
-
-                string sImageName = vFileName + DateTime.Now.ToString("YYYYMMDDHHMMSS");
+                Random vRnd = new Random();
+                int iRndCount = vRnd.Next(1000, 9999);
+                string sImageName = vFileName + iRndCount.ToString();
 
                 var vImageSavePath = Server.MapPath("/BlogImages/") + sImageName + vExtension;
                 //sImageName = sImageName + vExtension;
                 vReturnImagePath = "/BlogImages/" + sImageName + vExtension;
-                ViewBag.Msg = vImageSavePath;
                 var path = vImageSavePath;
 
                 // Saving Image in Original Mode

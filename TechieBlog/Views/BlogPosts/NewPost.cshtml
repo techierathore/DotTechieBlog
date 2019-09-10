@@ -122,24 +122,23 @@
 }
 
 @section Scripts {
+    <!--include fontawesome-->
     @Scripts.Render("~/bundles/summernote/js")
 
-<script type="text/javascript">
-
-    $('#PostContent').summernote({
-        height: 300,                 // set editor height
-        minHeight: null,             // set minimum height of editor
-        maxHeight: null,             // set maximum height of editor
-        focus: true,                  // set focus to editable area after initializing summernote
-        callbacks: {
-            onImageUpload: function (files) {
-                for (let i = 0; i < files.length; i++) {
-                    UploadImage(files[i]);
+    <script type="text/javascript">   
+       $('#PostContent').summernote({
+                height: 300,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: true,                 // set focus to editable area after initializing summernote
+                callbacks: {
+                    onImageUpload: function (files) {
+                        for (let i = 0; i < files.length; i++) {
+                            UploadImage(files[i]);
+                        }
+                    }
                 }
-            }
-        }
-    });
-
+            });
     function UploadImage(file) {
         var url = '@Url.Action("UploadFile", "Images")';
 
@@ -209,5 +208,5 @@
             }
         }
     }
-</script>
+    </script>
 }

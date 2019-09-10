@@ -66,6 +66,7 @@ namespace TechieBlog
             bundles.Add(new StyleBundle("~/bundles/summernote/css").Include(
                       "~/Vendor/summernote/summernote.css",
                       "~/Vendor/summernote/summernote-bs3.css"));
+
             #endregion
 
             #region DefaultBundle

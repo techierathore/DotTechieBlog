@@ -32,6 +32,7 @@ namespace TechieBlog.Controllers
                 return HttpNotFound();
             }
             vPost.UIPageTitle = "Edit Post";
+            vPost.UpdatedOn = DateTime.Today;
             //Send you to NewPost.chtml to save copy same page 
             return View("NewPost", vPost);
         }
@@ -39,8 +40,7 @@ namespace TechieBlog.Controllers
         {
             Post newPost = new Post() {
                 PostID =0,
-                UIPageTitle = "New Post",
-                CreatedOn =DateTime.Today};
+                UIPageTitle = "New Post" };
             return View(newPost);
         }
         [HttpPost]
@@ -53,13 +53,23 @@ namespace TechieBlog.Controllers
             bool bResult;
             if (aNewPost.PostID == 0)
             {
+                aNewPost.CreatedOn = DateTime.Today;
                 bResult = objDataSvc.SaveNewBlog(aNewPost);
             }
             else {
                 aNewPost.UpdatedOn = DateTime.Today;
                 bResult = objDataSvc.UpdateBlog(aNewPost); }
-            if (bResult) return RedirectToAction("ShowAllPosts", "BlogPosts");
-
+            if (bResult && aNewPost.Published)
+            {
+                return RedirectToAction("ShowAllPosts", "BlogPosts");
+            }
+            else if (bResult && (aNewPost.PostID == 0))
+            { return RedirectToAction("ShowAllPosts", "BlogPosts"); }
+            else if (bResult)
+            {
+                //Send you to NewPost.chtml to save copy same page 
+                return View("NewPost", aNewPost);
+            }
             ModelState.AddModelError("", "Unable to Save Blog");
             // If we got this far, something failed, redisplay form
             return View();

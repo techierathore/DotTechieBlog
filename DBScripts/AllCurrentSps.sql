@@ -36,18 +36,19 @@ CREATE PROCEDURE `GetUserByEmail`(IN `LoginMail` VARCHAR(550))
 SELECT `UserID`,`FirstName`,`LastName`,`EmailID`,`LoginPassword`,`Role`,`CreatedTime`,`UpdatedTime`,`LastLogin`
 FROM BlogUser WHERE EmailID = LoginMail
 
-CREATE PROCEDURE `PostInsert`(IN `Title` VARCHAR(550),IN `Abstract` VARCHAR(550), 
-    IN `PostContent` LONGTEXT, IN `UserID` BIGINT, IN `Tags` VARCHAR(550), 
-    IN `FeaturedImage` VARCHAR(550), IN `Published` BOOLEAN)
-    MODIFIES SQL DATA
-INSERT INTO Post
-(
-	`Title`,`Abstract`,`PostContent`,`UserID`,`Tags`,`FeaturedImage`,`Published`
-)
-VALUES
-(
-	Title,Abstract, PostContent,UserID,Tags,FeaturedImage,Published
-)
+CREATE DEFINER=`MobiLyfeMaster`@`%` PROCEDURE `PostInsert`(
+	IN `Title` VARCHAR(550),
+    IN `Abstract` VARCHAR(550), 
+    IN `PostContent` LONGTEXT, 
+    IN `UserID` BIGINT, 
+    IN `Tags` VARCHAR(550), 
+    IN `FeaturedImage` VARCHAR(550), `CreatedOn` datetime, 
+    IN `Published` BOOLEAN)
+BEGIN
+INSERT INTO Post (`Title`,`Abstract`,`PostContent`,`UserID`,`Tags`,`FeaturedImage`,`CreatedOn`,`Published`)
+VALUES (Title,Abstract, PostContent,UserID,Tags,FeaturedImage,CreatedOn,Published);
+END
+
 
 CREATE PROCEDURE `PostUpdate`(
     BlogPostID bigint, Title VARCHAR(550), Abstract VARCHAR(550),

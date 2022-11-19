@@ -1,29 +1,3 @@
-CREATE PROCEDURE `BlogImageInsert`(
-	ImageName nvarchar(150),
-	ImagePath nvarchar(550),
-	Size int,
-	CreatedTime datetime,
-	UserID bigint
-)
-BEGIN
-INSERT INTO BlogImage
-(`ImageName`,`ImagePath`,`Size`,`CreatedTime`,`UserID`)
-VALUES
-( ImageName,ImagePath,Size,CreatedTime,UserID );
-END
-
-CREATE PROCEDURE `BlogUsersInsert`(IN `FirstName` VARCHAR(250), IN `LastName` VARCHAR(250), IN `EmailID` VARCHAR(550), IN `LoginPassword` VARCHAR(20), IN `Role` VARCHAR(25), IN `CreatedTime` DATETIME, IN `UpdatedTime` DATETIME)
-    NO SQL
-INSERT INTO BlogUser
-(`FirstName`,`LastName`,`EmailID`,`LoginPassword`,`Role`,`CreatedTime`,`UpdatedTime`)
-VALUES
-(FirstName,LastName,EmailID,LoginPassword,Role,CreatedTime,UpdatedTime)
-
-CREATE PROCEDURE `GetAllTags`()
-BEGIN
-   SELECT `TagID`,`TagName` FROM Tag;
-END
-
 CREATE PROCEDURE `GetLoginUser`(	LoginMail nvarchar(550),
 	LoginPassword nvarchar(20))
 BEGIN
@@ -36,71 +10,6 @@ CREATE PROCEDURE `GetUserByEmail`(IN `LoginMail` VARCHAR(550))
 SELECT `UserID`,`FirstName`,`LastName`,`EmailID`,`LoginPassword`,`Role`,`CreatedTime`,`UpdatedTime`,`LastLogin`
 FROM BlogUser WHERE EmailID = LoginMail
 
-CREATE DEFINER=`MobiLyfeMaster`@`%` PROCEDURE `PostInsert`(
-	IN `Title` VARCHAR(550),
-    IN `Abstract` VARCHAR(550), 
-    IN `PostContent` LONGTEXT, 
-    IN `UserID` BIGINT, 
-    IN `Tags` VARCHAR(550), 
-    IN `FeaturedImage` VARCHAR(550), `CreatedOn` datetime, 
-    IN `Published` BOOLEAN)
-BEGIN
-INSERT INTO Post (`Title`,`Abstract`,`PostContent`,`UserID`,`Tags`,`FeaturedImage`,`CreatedOn`,`Published`)
-VALUES (Title,Abstract, PostContent,UserID,Tags,FeaturedImage,CreatedOn,Published);
-END
-
-
-CREATE PROCEDURE `PostUpdate`(
-    BlogPostID bigint, Title VARCHAR(550), Abstract VARCHAR(550),
-    PostContent LONGTEXT, UserID bigint, Tags VARCHAR(550),
-    FeaturedImage VARCHAR(550),UpdatedOn datetime, Published BOOLEAN
-)
-BEGIN
-UPDATE Post
-SET `Title` = Title, `Abstract` = Abstract, `PostContent` = PostContent,
-	`UserID` = UserID, `Tags` = Tags, `FeaturedImage` = FeaturedImage,
-    `UpdatedOn` = UpdatedOn, `Published` = Published
-WHERE `PostID` = BlogPostID;
-END
-
-CREATE PROCEDURE `SelectAllPosts`()
-BEGIN
-
-SELECT `PostID`,`Title`,`Abstract`,`PostContent`,`CreatedOn`,`UpdatedOn`,`Published`,
-	`Post`.`UserID`,`Tags`,`FeaturedImage` , `BlogUser`.`FirstName` as `BlogWriter`
-FROM TechieBlog.Post inner join TechieBlog.BlogUser where `Post`.`UserID` = `BlogUser`.`UserID`;
-END
-
-CREATE PROCEDURE `PostSelect`(BlogPostID bigint)
-BEGIN
-
-SELECT `PostID`,`Title`,`Abstract`,`PostContent`,`CreatedOn`,`UpdatedOn`,
-	`UserID`,`Tags`,`FeaturedImage`,`Published`
-FROM Post WHERE `PostID` = BlogPostID;
-END
-
-CREATE PROCEDURE `PostsByUserID`(BlogUserID bigint)
-BEGIN
-SELECT `PostID`,`Title`,`Abstract`,`PostContent`,`CreatedOn`,`UpdatedOn`,
-	`UserID`,`Tags`,`FeaturedImage`,`Published`
-FROM Post WHERE `UserID` = BlogUserID;
-END
-
-CREATE PROCEDURE `TagInsert`(pTagName nvarchar(150))
-BEGIN
-INSERT INTO Tag (`TagName`) VALUES (pTagName);
-END
-
-CREATE PROCEDURE `TagSelect`(pTagID bigint)
-BEGIN
-SELECT `TagID`,	`TagName`
-FROM Tag WHERE `TagID` = pTagID;
-END
-
-CREATE PROCEDURE `TagUpdate`(pTagID bigint,	pTagName nvarchar(150))
-BEGIN
-UPDATE Tag SET `TagName` = pTagName WHERE `TagID` = pTagID;
-END
 
 CREATE PROCEDURE `GetPagedBlogList`(aPageSize int, aOffset int)
 BEGIN
@@ -121,52 +30,11 @@ FROM TechieBlog.Post OutErr Where OutErr.Published =1
 Order By OutErr.PostID DESC LIMIT 1 ;
 END
 
-CREATE DEFINER=`ForRemote`@`%` PROCEDURE `BlogCommentInsert`(
-	pPostID bigint, pGivenOn datetime, pGivenBy varchar(350),
-    pEmail varchar(350), pComment varchar(850), pPublish BOOLEAN,
-    pParentID bigint
-)
-BEGIN
-INSERT INTO BlogComment
-(`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`,`ParentCommentID`)
-VALUES
-(pPostID,pGivenOn,pGivenBy,pEmail,pComment,pPublish,pParentID);
-END
 
-CREATE PROCEDURE `BlogCommentSelect`(BlogCommentID bigint)
-BEGIN
-SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`,`ParentCommentID`
-FROM BlogComment Where `CommentID` = BlogCommentID;
-END
 
-CREATE PROCEDURE `ApproveBlogComment`(BlogCommentID bigint)
-BEGIN
-UPDATE BlogComment SET	`Published` = 1 WHERE `CommentID` = BlogCommentID;
-END
 
-CREATE PROCEDURE `GetPostParentComments`(BlogPostID bigint)
-BEGIN
-SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`,`ParentCommentID`
-FROM BlogComment Where `Published` = 1 AND (`ParentCommentID` is null OR `ParentCommentID` = 0)  AND `PostID` = BlogPostID;
-END
 
-CREATE PROCEDURE `GetPostChildComments`(BlogPostID bigint)
-BEGIN
-SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`,`ParentCommentID`
-FROM BlogComment Where `Published` = 1 AND `ParentCommentID` is not null AND `PostID` = BlogPostID;
-END
 
-CREATE PROCEDURE `GetPagedUnAppComments`(aPageSize int, aOffset int)
-BEGIN
-SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`
-FROM BlogComment Where `Published` = 0  Order By `CommentID` DESC LIMIT aPageSize OFFSET aOffset ;
-END
-
-CREATE PROCEDURE `GetPagedComments`(aPageSize int, aOffset int)
-BEGIN
-SELECT `CommentID`,`PostID`,`GivenOn`,`GivenBy`,`Email`,`Comment`,`Published`
-FROM BlogComment Order By `CommentID` DESC LIMIT aPageSize OFFSET aOffset ;
-END
 
 CREATE PROCEDURE `GetAdminCounts`()
 BEGIN
@@ -179,47 +47,5 @@ FROM TechieBlog.Post OutErr Where OutErr.Published =1
 Order By OutErr.PostID DESC LIMIT 1 ;
 END
 
-CREATE PROCEDURE `GetPagedBlogImages`(aPageSize int, aOffset int)
-BEGIN
-SELECT `BlogImageID`,`ImageName`,`ImagePath`,`Size`,`CreatedTime`,`UserID`
-FROM BlogImage Order By `BlogImageID` DESC LIMIT aPageSize OFFSET aOffset ;
-END
 
-CREATE PROCEDURE `GetUserEvents`(BlogUserID bigint)
-BEGIN
-SELECT `EventID`,`LogoIconPath`,`EventTitle`,`SessionTitle`,
-		`EventUrl`,`EventDate`,`Type`,`UserID`
-FROM TechieBlog.UserEvents Where UserID = BlogUserID ORDER BY EventDate DESC;
-END
 
-CREATE PROCEDURE `UserEventInsert` (
-pLogoIconPath varchar(350), pEventTitle varchar(350), pSessionTitle varchar(350),
-pEventUrl varchar(350), pEventDate datetime,pType varchar(50), BlogUserID bigint)
-BEGIN
-INSERT INTO UserEvents
-(`LogoIconPath`,`EventTitle`,`SessionTitle`,`EventUrl`,`EventDate`,`Type`,`UserID`)
-VALUES
-(pLogoIconPath,pEventTitle,pSessionTitle,pEventUrl,pEventDate,pType,BlogUserID);
-END
-
-CREATE PROCEDURE `UserEventSelect` (UserEventID bigint)
-BEGIN
-SELECT `EventID`,`LogoIconPath`,`EventTitle`,`SessionTitle`,
-		`EventUrl`,`EventDate`,`Type`,`UserID`
-FROM TechieBlog.UserEvents Where EventID = UserEventID;
-END
-
-CREATE PROCEDURE `UserEventUpdate`(
-UserEventID bigint, pLogoIconPath varchar(350), pEventTitle varchar(350), pSessionTitle varchar(350),
-pEventUrl varchar(350), pEventDate datetime,pType varchar(50), pUserID bigint)
-BEGIN
-UPDATE UserEvents
-SET `LogoIconPath` = pLogoIconPath,
-    `EventTitle` = pEventTitle,
-	`SessionTitle` = pSessionTitle,
-	`EventUrl` = pEventUrl,
-	`EventDate` = pEventDate,
-	`Type` = pType,
-	`UserID` = pUserID
-WHERE `EventID` = UserEventID;
-END
